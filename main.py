@@ -1,5 +1,5 @@
 import random
-
+import logging
 import pygame as pg
 from pygame.locals import *
 from sys import exit
@@ -17,7 +17,7 @@ def main():
 
     # create player
     player = pg.image.load(("design/playerv1.png"))
-    player_rect = player.get_rect(topleft=(1100, 550)) # it's actually left and then top
+    player_rect = player.get_rect(topleft=(1100, 550))  # it's actually left and then top
 
     # create entity
     entity = Entity()
@@ -43,8 +43,21 @@ def main():
             player_rect.move_ip(1, 0)
             player_rect.clamp_ip(screen.get_rect())
 
+        # check if entity is going to wake up
+        timestamp = pg.time.get_ticks()
+        entity_timestamp = entity.get_entity_timestamp()
+        if not entity.is_awake() and (timestamp == entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 15):
+            print("waking up")
+            entity.wake_up()
+
+        if entity.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
+            print("coming back to sleep")
+            entity.come_back_to_sleep()
+
+
+
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
-        entity.render(screen) # experiment to draw the entity
+        entity.render(screen)  # experiment to draw the entity
         screen.blit(player, player_rect)
         pg.display.update()
 

@@ -14,7 +14,11 @@ def main():
     pg.display.set_caption("game made with pygame")
     clock = pg.time.Clock()
 
-    # load entity images
+    # create player
+    player = pg.image.load(("design/playerv1.png"))
+    player_rect = player.get_rect(topleft=(1100, 550))
+
+    # create entity
     entity_awake = pg.image.load("design/entity_awakev1.png")
 
     font = pg.font.SysFont('arial', 30, True, False)
@@ -31,8 +35,16 @@ def main():
                 pg.quit()
                 exit()
 
+        if pg.key.get_pressed()[K_LEFT]:
+            player_rect.move_ip(-1, 0)
+            player_rect.clamp_ip(screen.get_rect())
+        if pg.key.get_pressed()[K_RIGHT]:
+            player_rect.move_ip(1, 0)
+            player_rect.clamp_ip(screen.get_rect())
+
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
         screen.blit(entity_awake, (500, 40)) # experiment to draw the entity
+        screen.blit(player, player_rect)
         pg.display.update()
 
 

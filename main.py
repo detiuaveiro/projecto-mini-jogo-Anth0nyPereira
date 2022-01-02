@@ -3,6 +3,7 @@ import random
 import pygame as pg
 from pygame.locals import *
 from sys import exit
+from entity import Entity
 
 WIDTH = 1200
 HEIGHT = 650
@@ -16,10 +17,10 @@ def main():
 
     # create player
     player = pg.image.load(("design/playerv1.png"))
-    player_rect = player.get_rect(topleft=(1100, 550))
+    player_rect = player.get_rect(topleft=(1100, 550)) # it's actually left and then top
 
     # create entity
-    entity_awake = pg.image.load("design/entity_awakev1.png")
+    entity = Entity()
 
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
@@ -43,7 +44,7 @@ def main():
             player_rect.clamp_ip(screen.get_rect())
 
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
-        screen.blit(entity_awake, (500, 40)) # experiment to draw the entity
+        entity.render(screen) # experiment to draw the entity
         screen.blit(player, player_rect)
         pg.display.update()
 

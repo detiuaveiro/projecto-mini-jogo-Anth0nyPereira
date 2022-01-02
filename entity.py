@@ -27,6 +27,7 @@ class Entity:
     def come_back_to_sleep(self):
         self.actual_entity = self.entity_sleeping
         self.entity_timestamp = get_random_timestamp()
+        self.entity_previous_timestamp = pg.time.get_ticks()
         print(self.entity_timestamp)
 
     def is_awake(self):

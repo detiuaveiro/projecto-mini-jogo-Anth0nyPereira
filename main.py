@@ -44,7 +44,7 @@ def main():
             player_rect.clamp_ip(screen.get_rect())
 
         # check if entity is going to wake up
-        timestamp = pg.time.get_ticks()
+        timestamp = pg.time.get_ticks() - entity.entity_previous_timestamp
         entity_timestamp = entity.get_entity_timestamp()
         if not entity.is_awake() and (timestamp == entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 15):
             print("waking up")

@@ -28,7 +28,9 @@ def main():
     entity = Entity()
 
     # create box to hide the player
+    box_list = pg.sprite.Group()
     box = Box()
+    box_list.add(box)
 
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
@@ -62,6 +64,11 @@ def main():
         if entity.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
             print("coming back to sleep")
             entity.come_back_to_sleep()
+
+
+        # check if player collides with box
+        box_hit_lst = pg.sprite.spritecollide(player, box_list, False)
+        print(box_hit_lst)
 
         screen.blit(background, (0, 0))
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner

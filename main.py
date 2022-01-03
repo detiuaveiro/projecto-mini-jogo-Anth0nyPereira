@@ -5,6 +5,7 @@ from pygame.locals import *
 from sys import exit
 from entity import Entity
 from box import Box
+from player import Player
 
 WIDTH = 1200
 HEIGHT = 650
@@ -21,8 +22,7 @@ def main():
     background = pg.transform.scale(background, (WIDTH, HEIGHT))
 
     # create player
-    player = pg.image.load("design/playerv1.png")
-    player_rect = player.get_rect(topleft=(1100, 550))  # it's actually left and then top
+    player = Player()
 
     # create entity
     entity = Entity()
@@ -45,16 +45,17 @@ def main():
                 exit()
 
         if pg.key.get_pressed()[K_LEFT]:
-            player_rect.move_ip(-1, 0)
-            player_rect.clamp_ip(screen.get_rect())
+            player.get_rect().move_ip(-1, 0)
+            player.get_rect().clamp_ip(screen.get_rect())
         if pg.key.get_pressed()[K_RIGHT]:
-            player_rect.move_ip(1, 0)
-            player_rect.clamp_ip(screen.get_rect())
+            player.get_rect().move_ip(1, 0)
+            player.get_rect().clamp_ip(screen.get_rect())
 
         # check if entity is going to wake up
         timestamp = pg.time.get_ticks() - entity.entity_previous_timestamp
         entity_timestamp = entity.get_entity_timestamp()
-        if not entity.is_awake() and (timestamp == entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 15):
+        if not entity.is_awake() and (
+                timestamp == entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 15):
             print("waking up")
             entity.wake_up()
 
@@ -62,11 +63,10 @@ def main():
             print("coming back to sleep")
             entity.come_back_to_sleep()
 
-
-        screen.blit(background, (0,0))
+        screen.blit(background, (0, 0))
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
         entity.render(screen)  # experiment to draw the entity
-        screen.blit(player, player_rect)
+        player.render(screen)
         box.render(screen)
         pg.display.update()
 

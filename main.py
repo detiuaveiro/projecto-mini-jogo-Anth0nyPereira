@@ -4,6 +4,7 @@ import pygame as pg
 from pygame.locals import *
 from sys import exit
 from entity import Entity
+from box import Box
 
 WIDTH = 1200
 HEIGHT = 650
@@ -20,11 +21,14 @@ def main():
     background = pg.transform.scale(background, (WIDTH, HEIGHT))
 
     # create player
-    player = pg.image.load(("design/playerv1.png"))
+    player = pg.image.load("design/playerv1.png")
     player_rect = player.get_rect(topleft=(1100, 550))  # it's actually left and then top
 
     # create entity
     entity = Entity()
+
+    # create box to hide the player
+    box = Box()
 
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
@@ -63,6 +67,7 @@ def main():
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
         entity.render(screen)  # experiment to draw the entity
         screen.blit(player, player_rect)
+        box.render(screen)
         pg.display.update()
 
 

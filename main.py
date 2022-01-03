@@ -15,6 +15,10 @@ def main():
     pg.display.set_caption("game made with pygame")
     clock = pg.time.Clock()
 
+    # set background
+    background = pg.image.load("design/background.png")
+    background = pg.transform.scale(background, (WIDTH, HEIGHT))
+
     # create player
     player = pg.image.load(("design/playerv1.png"))
     player_rect = player.get_rect(topleft=(1100, 550))  # it's actually left and then top
@@ -55,7 +59,7 @@ def main():
             entity.come_back_to_sleep()
 
 
-
+        screen.blit(background, (0,0))
         screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
         entity.render(screen)  # experiment to draw the entity
         screen.blit(player, player_rect)

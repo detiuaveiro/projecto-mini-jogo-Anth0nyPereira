@@ -12,7 +12,7 @@ class Box(pg.sprite.Sprite):
         # self.image = pg.transform.scale(self.image, (100, 60))
 
         # create a rect to track the position of the object
-        self.rect = self.image.get_rect(topleft=(800, 530))
+        self.rect = self.image.get_rect(topleft=(800, 526))
 
     def render(self, screen):
         screen.blit(self.image, self.rect)

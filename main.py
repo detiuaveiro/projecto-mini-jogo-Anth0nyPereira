@@ -7,6 +7,7 @@ from sys import exit
 from command import InputHandler
 from entity import Entity
 from box import Box
+from laser import Laser
 from player import Player
 from point import Point
 from prototype import BoxSpawner
@@ -106,9 +107,10 @@ def main():
             box.render(screen)
             box2.render(screen)
 
-            # experiment to draw a line
-            # point.render(screen)
-            # pg.draw.line(screen, 'red', (60, 80), (130, 100))
+            # create laser experiment
+            laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
+            laser_left.render(screen)
+
             pg.display.flip()
             pg.display.update()
 

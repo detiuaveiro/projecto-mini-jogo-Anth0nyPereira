@@ -24,8 +24,10 @@ class Entity:
         self.entity_previous_timestamp = 0
 
         # create two points at the eyes position
-        self.left_point = Point(self.pos_x + 88, self.pos_y + 100)
-        self.right_point = Point(self.pos_x + 133, self.pos_y + 100)
+        self.left_point_coords = (self.pos_x + 88, self.pos_y + 100)
+        self.right_point_coords = (self.pos_x + 133, self.pos_y + 100)
+        self.left_point = Point(self.left_point_coords)
+        self.right_point = Point(self.right_point_coords)
 
     def wake_up(self):
         self.actual_entity = self.entity_awake
@@ -48,3 +50,9 @@ class Entity:
 
     def get_entity_timestamp(self):
         return self.entity_timestamp
+
+    def get_left_point_coords(self):
+        return self.left_point_coords
+
+    def get_right_point_coords(self):
+        return self.right_point_coords

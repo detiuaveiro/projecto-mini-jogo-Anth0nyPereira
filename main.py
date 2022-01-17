@@ -26,7 +26,7 @@ def main():
     background = pg.transform.scale(background, (WIDTH, HEIGHT))
 
     # create player
-    player = Player()
+    player = Player(1100, 550)
 
     # create entity
     entity = Entity()
@@ -118,7 +118,8 @@ def main():
             pg.display.update()
 
             # call inputHandler
-            command = InputHandler(screen).handle_input(player)
+            InputHandler(screen).handle_input(player)
+            InputHandler(screen).handle_input(player.ref_point)
 
 
 if __name__ == '__main__':

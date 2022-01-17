@@ -8,6 +8,7 @@ from command import InputHandler
 from entity import Entity
 from box import Box
 from player import Player
+from point import Point
 from prototype import BoxSpawner
 
 WIDTH = 1200
@@ -32,7 +33,7 @@ def main():
 
     # create box to hide the player
     box_list = pg.sprite.Group()
-    box = Box(800, 526)
+    box = Box(1000, 526)
     box_list.add(box)
 
     # experiment to create a box spawner
@@ -40,6 +41,10 @@ def main():
     box2 = box_spawner.spawn_box(box)
     # print(f'{box2.pos_x} - {box2.pos_y}')
     box2.set_pos(400, 526)
+
+    # create point object
+    point = Point(400, 526, "blue")
+
 
 
     font = pg.font.SysFont('arial', 30, True, False)
@@ -107,8 +112,8 @@ def main():
             box2.render(screen)
 
             # experiment to draw a line
-            # screen.blit(('red', (60, 80), (130, 100)), )
-            pg.draw.line(screen, 'red', (60, 80), (130, 100))
+            point.render(screen)
+            # pg.draw.line(screen, 'red', (60, 80), (130, 100))
             pg.display.flip()
             pg.display.update()
 

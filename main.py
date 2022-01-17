@@ -112,7 +112,7 @@ def main():
             box2.render(screen)
 
             # experiment to draw a line
-            point.render(screen)
+            # point.render(screen)
             # pg.draw.line(screen, 'red', (60, 80), (130, 100))
             pg.display.flip()
             pg.display.update()

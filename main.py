@@ -110,6 +110,10 @@ def main():
             # create laser experiment
             laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
             laser_left.render(screen)
+            # pg.sprite.spritecollide(laser_left, box_list, False)
+
+            laser_right = Laser("red", entity.get_right_point_coords(), player.ref_point.get_pos())
+            laser_right.render(screen)
 
             pg.display.flip()
             pg.display.update()

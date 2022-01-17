@@ -3,6 +3,8 @@ import logging
 import pygame as pg
 from pygame.locals import *
 from sys import exit
+
+from command import InputHandler
 from entity import Entity
 from box import Box
 from player import Player
@@ -61,12 +63,15 @@ def main():
                     pg.quit()
                     exit()
 
+            '''
             if pg.key.get_pressed()[K_LEFT]:
                 player.get_rect().move_ip(-1, 0)
                 player.get_rect().clamp_ip(screen.get_rect())
             if pg.key.get_pressed()[K_RIGHT]:
                 player.get_rect().move_ip(1, 0)
                 player.get_rect().clamp_ip(screen.get_rect())
+                
+            '''
 
             # check if entity is going to wake up
             timestamp = pg.time.get_ticks() - entity.entity_previous_timestamp
@@ -91,7 +96,16 @@ def main():
             entity.render(screen)  # experiment to draw the entity
             player.render(screen)
             box.render(screen)
+
+            # experiment to draw a line
+            # screen.blit(('red', (60, 80), (130, 100)), )
+            pg.draw.line(screen, 'red', (60, 80), (130, 100))
+            pg.display.flip()
             pg.display.update()
+
+            # call inputHandler
+            command = InputHandler(screen).handle_input(player)
+
 
 
 if __name__ == '__main__':

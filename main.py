@@ -8,6 +8,7 @@ from command import InputHandler
 from entity import Entity
 from box import Box
 from player import Player
+from prototype import BoxSpawner
 
 WIDTH = 1200
 HEIGHT = 650
@@ -31,8 +32,15 @@ def main():
 
     # create box to hide the player
     box_list = pg.sprite.Group()
-    box = Box()
+    box = Box(800, 526)
     box_list.add(box)
+
+    # experiment to create a box spawner
+    box_spawner = BoxSpawner()
+    box2 = box_spawner.spawn_box(box)
+    # print(f'{box2.pos_x} - {box2.pos_y}')
+    box2.set_pos(400, 526)
+
 
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
@@ -48,7 +56,7 @@ def main():
             font = pg.font.SysFont('michroma', 80, True, False)
             game_over_msg = "Game Over"
             game_over_txt = font.render(game_over_msg, False, 'red')
-            screen.blit(game_over_txt, (game_over_txt.get_rect(center=(WIDTH//2, 100))))
+            screen.blit(game_over_txt, (game_over_txt.get_rect(center=(WIDTH // 2, 100))))
             for event in pg.event.get():
                 if event.type == QUIT:
                     pg.quit()
@@ -96,6 +104,7 @@ def main():
             entity.render(screen)  # experiment to draw the entity
             player.render(screen)
             box.render(screen)
+            box2.render(screen)
 
             # experiment to draw a line
             # screen.blit(('red', (60, 80), (130, 100)), )
@@ -105,7 +114,6 @@ def main():
 
             # call inputHandler
             command = InputHandler(screen).handle_input(player)
-
 
 
 if __name__ == '__main__':

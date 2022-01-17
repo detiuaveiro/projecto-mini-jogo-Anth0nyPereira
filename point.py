@@ -2,12 +2,10 @@ import pygame as pg
 
 
 class Point(pg.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, color, width=3):
+    def __init__(self, pos_x, pos_y):
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.color = color
-        self.width = width
 
         self.image = pg.image.load("design/point.png")
 

@@ -20,7 +20,7 @@ class Player(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y)) # it's actually left and then top
 
         # create a point to use it to the collision algorithm
-        self.ref_point = Point(self.pos_x + 15, self.pos_y + 15, "green")
+        self.ref_point = Point(self.pos_x + 15, self.pos_y + 15)
 
     def render(self, screen):
         screen.blit(self.image, self.rect)

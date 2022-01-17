@@ -42,11 +42,6 @@ def main():
     # print(f'{box2.pos_x} - {box2.pos_y}')
     box2.set_pos(400, 526)
 
-    # create point object
-    point = Point(400, 526, "blue")
-
-
-
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
 

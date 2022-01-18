@@ -23,7 +23,6 @@ class MoveLeft(Command):
         self.object.get_rect().move_ip(-1, 0)
         # print(self.object.get_pos())
         self.object.set_pos((self.object.get_pos()[0] + vector[0], self.object.get_pos()[1] + vector[1]))
-        print(self.object.get_pos())
         self.object.get_rect().clamp_ip(self.screen.get_rect())
 
 

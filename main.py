@@ -10,7 +10,7 @@ from box import Box
 from laser import Laser
 from player import Player
 from point import Point
-from prototype import BoxSpawner
+from prototype import BoxSpawner, LaserSpawner
 
 WIDTH = 1200
 HEIGHT = 650
@@ -34,14 +34,22 @@ def main():
 
     # create box to hide the player
     box_list = pg.sprite.Group()
-    box = Box(1000, 526)
+    box = Box(screen)
+    # box = Box(screen, 1000, 526)
     box_list.add(box)
 
+
+
     # experiment to create a box spawner
-    box_spawner = BoxSpawner()
-    box2 = box_spawner.spawn_box(box)
+    # box_spawner = BoxSpawner()
+    # box2 = box_spawner.spawn_box(box)
     # print(f'{box2.pos_x} - {box2.pos_y}')
-    box2.set_pos(400, 526)
+    # box2.set_pos(400, 526)
+
+    # experiment to create a laser spawner
+    laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
+    laser_right = Laser("red", entity.get_right_point_coords(), player.ref_point.get_pos())
+    laser_spawner = LaserSpawner()
 
     font = pg.font.SysFont('arial', 30, True, False)
     score = 0
@@ -93,27 +101,51 @@ def main():
             if entity.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
                 print("coming back to sleep")
                 entity.come_back_to_sleep()
-
+            '''
             # check if player collides with box
             box_hit_lst = pg.sprite.spritecollide(player, box_list, False)
             if entity.is_awake() and not box_hit_lst:  # if list is empty, no collision, so game over
                 print("Game Over")
                 game_over = True
+            '''
 
             screen.blit(background, (0, 0))
             screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
             entity.render(screen)  # experiment to draw the entity
             player.render(screen)
-            box.render(screen)
-            box2.render(screen)
+            # box.render(screen)
+            # box2.render(screen)
 
             # create laser experiment
-            laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
-            laser_left.render(screen)
-            # pg.sprite.spritecollide(laser_left, box_list, False)
+            # laser_left = Laser()
+            # laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
+            # laser_left.render(screen)
 
-            laser_right = Laser("red", entity.get_right_point_coords(), player.ref_point.get_pos())
+            # laser_right = Laser()
+            # laser_right = Laser("red", entity.get_right_point_coords(), player.ref_point.get_pos())
+            # laser_right.render(screen)
+
+            laser_left.set_ending_point(player.ref_point.get_pos())
+            laser_right.set_ending_point(player.ref_point.get_pos())
+            laser_left = laser_spawner.spawn_laser(laser_left)
+            laser_right = laser_spawner.spawn_laser(laser_right)
+            '''
+            group = pg.sprite.Group([box, laser_left, laser_right])
+            group.draw(screen)
+            '''
+            laser_left.render(screen)
             laser_right.render(screen)
+            box.render(screen)
+            hit_left = pg.sprite.collide_mask(laser_left, box)
+            hit_right = pg.sprite.collide_mask(laser_right, box)
+
+
+            # collisions algorithm
+
+            for box in box_list:
+                if entity.is_awake() and not hit_left and not hit_right:
+                    print("Game Over")
+                    game_over = True
 
             pg.display.flip()
             pg.display.update()

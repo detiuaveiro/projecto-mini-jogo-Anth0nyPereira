@@ -2,10 +2,12 @@ import pygame as pg
 
 
 class Box(pg.sprite.Sprite):
-
-    def __init__(self, pos_x, pos_y):
+    '''
+    def __init__(self, screen, pos_x, pos_y):
         # call the parent class (Sprite) constructor
         super().__init__()
+
+        self.screen = screen
 
         # store the desired position
         self.pos_x = pos_x
@@ -13,14 +15,26 @@ class Box(pg.sprite.Sprite):
 
         # create an image of the box
         self.image = pg.image.load("design/box.png")
-        # self.image = pg.transform.scale(self.image, (100, 60))
+        self.image.set_colorkey((0, 0, 0))
 
         # create a rect to track the position of the object
-        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y)) # this is basically the position, just a reminder, the box is not being scaled yet
+        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))
+
+        self.mask = pg.mask.from_surface(self.image)
+
+    '''
+    def __init__(self, screen):
+        super().__init__()
+        # self.image = pygame.Surface((50, 50))
+        self.image = pg.image.load("design/box.png")
+        self.image.set_colorkey((0, 0, 0))
+        # pygame.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 50))
+        self.rect = self.image.get_rect(topleft=(1000, 526))
+        # screen.blit(self.image, self.rect)
 
     def clone(self):
         # print("here")
-        return Box(self.pos_x, self.pos_y)
+        return Box(self.screen, self.pos_x, self.pos_y)
 
     def render(self, screen):
         screen.blit(self.image, self.rect)
@@ -40,7 +54,3 @@ class Box(pg.sprite.Sprite):
 
     def set_rect(self, new_rect):
         self.rect = new_rect
-
-
-
-

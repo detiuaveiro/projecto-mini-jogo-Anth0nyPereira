@@ -22,9 +22,21 @@ class Player(pg.sprite.Sprite):
         # create a point to use it for the collision algorithm
         self.ref_point = Point((self.pos_x + 15, self.pos_y + 15))
 
+        # initialize pointer to picked food
+        self.food = None
+
     def render(self, screen):
         screen.blit(self.image, self.rect)
         self.ref_point.render(screen)
+
+    def update(self, food_list):
+        food = pg.sprite.spritecollideany(self, food_list)
+        if food:
+            print("hit")
+            self.food = food
+            self.image = pg.image.load("design/playerwithfood.png")
+            food.kill()
+            pg.display.update()
 
     def get_rect(self):
         return self.rect

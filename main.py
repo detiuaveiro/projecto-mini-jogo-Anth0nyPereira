@@ -7,6 +7,7 @@ from sys import exit
 from command import InputHandler
 from entity import Entity
 from box import Box
+from food import Food
 from laser import Laser
 from player import Player
 from point import Point
@@ -38,7 +39,10 @@ def main():
     # box = Box(screen, 1000, 526)
     box_list.add(box)
 
-
+    # create food
+    food = Food(screen)
+    food_lst = pg.sprite.Group()
+    food_lst.add(food)
 
     # experiment to create a box spawner
     # box_spawner = BoxSpawner()
@@ -113,6 +117,9 @@ def main():
             screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
             entity.render(screen)  # experiment to draw the entity
             player.render(screen)
+
+            for fd in food_lst:
+                fd.render(screen)
             # box.render(screen)
             # box2.render(screen)
 
@@ -139,6 +146,10 @@ def main():
             hit_left = pg.sprite.collide_mask(laser_left, box)
             hit_right = pg.sprite.collide_mask(laser_right, box)
 
+
+            # collision with food test
+            player.update(food_lst)
+            print(food_lst)
 
             # collisions algorithm
 

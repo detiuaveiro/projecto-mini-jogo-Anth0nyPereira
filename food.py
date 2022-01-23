@@ -1,20 +1,13 @@
 import pygame as pg
 
 
-class Box(pg.sprite.Sprite):
+class Food(pg.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        # self.image = pygame.Surface((50, 50))
-        self.image = pg.image.load("design/box.png")
+        self.image = pg.image.load("design/naco.png")
         self.image.set_colorkey((0, 0, 0))
-        # pygame.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 50))
-        self.rect = self.image.get_rect(topleft=(1000, 526))
-        # screen.blit(self.image, self.rect)
-
-    def clone(self):
-        # print("here")
-        return Box(self.screen, self.pos_x, self.pos_y)
+        self.rect = self.image.get_rect(topleft=(500, 500))
 
     def render(self, screen):
         screen.blit(self.image, self.rect)

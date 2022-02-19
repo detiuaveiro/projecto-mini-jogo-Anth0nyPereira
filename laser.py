@@ -1,7 +1,7 @@
 import math
 
 import pygame as pg
-
+from pygame import Vector2
 
 class Laser(pg.sprite.Sprite):
 
@@ -20,7 +20,16 @@ class Laser(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(0, 0))
         self.render(self.image)
         self.mask = pg.mask.from_surface(self.image)
-
+        self.vector = Vector2(self.ending_point[0] - self.starting_point[0], self.ending_point[1] - self.starting_point[1])
+        self.angle = self.vector.angle_to(Vector2(1, 0))
+        self.m = math.tan(self.angle)
+        self.b = starting_point[1] - self.m * starting_point[0]
+        self.positions = []
+        x = min(starting_point[0], ending_point[0])
+        while x < max(starting_point[0], ending_point[0]):
+            y = self.m * x + self.b
+            self.positions.append((x, y))
+            x += 1
     '''
     def __init__(self, screen):
         super().__init__()
@@ -29,6 +38,13 @@ class Laser(pg.sprite.Sprite):
         self.render(self.image)
         self.rect = self.image.get_rect(topleft=(50, 50))
     '''
+    def check_collisions(self, box):
+        # checks if there are points from the line given by the starting and ending points
+        # inside the specified object aka box, the output gives the start and end points from the box that belong to the
+        # line
+        if box.rect.clipline((self.starting_point, self.ending_point)) != ():
+            return True
+        return False
 
     def render(self, screen):
         pg.draw.line(screen, self.color, self.starting_point, self.ending_point, self.width)

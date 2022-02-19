@@ -16,7 +16,7 @@ class Box(pg.sprite.Sprite):
         # print("here")
         return Box(self.screen, self.pos_x, self.pos_y)
 
-    def render(self, screen):
+    def draw(self, screen):
         screen.blit(self.image, self.rect)
 
     def set_x(self, new_x):

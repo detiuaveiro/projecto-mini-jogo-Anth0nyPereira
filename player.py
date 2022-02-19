@@ -17,13 +17,40 @@ class Player(pg.sprite.Sprite):
         self.image = pg.image.load("design/playerv1.png")
 
         # create a rect to track the position of the object
-        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y)) # it's actually left and then top
+        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))  # it's actually left and then top
 
         # create a point to use it for the collision algorithm
         self.ref_point = Point((self.pos_x + 15, self.pos_y + 15))
 
         # initialize pointer to picked food
         self.food = None
+
+    def move_left(self, screen):
+        # print("move left")
+        vector = (-5, 0)
+        self.get_rect().move_ip(-5, 0)
+        # print(self.object.get_pos())
+        self.set_pos((self.get_pos()[0] + vector[0], self.get_pos()[1] + vector[1]))
+        self.get_rect().clamp_ip(screen.get_rect())
+
+    def move_right(self, screen):
+        # print("move right")
+        vector = (5, 0)
+        self.get_rect().move_ip(5, 0)
+        self.set_pos((self.get_pos()[0] + vector[0], self.get_pos()[1] + vector[1]))
+        self.get_rect().clamp_ip(screen.get_rect())
+
+    def move_up(self, screen):
+        vector = (0, -5)
+        self.get_rect().move_ip(0, -5)
+        self.set_pos((self.get_pos()[0] + vector[0], self.get_pos()[1] + vector[1]))
+        self.get_rect().clamp_ip(screen.get_rect())
+
+    def move_down(self, screen):
+        vector = (0, 5)
+        self.get_rect().move_ip(0, 5)
+        self.set_pos((self.get_pos()[0] + vector[0], self.get_pos()[1] + vector[1]))
+        self.get_rect().clamp_ip(screen.get_rect())
 
     def render(self, screen):
         screen.blit(self.image, self.rect)

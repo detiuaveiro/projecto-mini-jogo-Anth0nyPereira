@@ -156,5 +156,5 @@ class GameManager:
                 pg.display.update()
 
                 # call inputHandler
-                InputHandler(self.screen).handle_input(self.player)
+                InputHandler(self.screen).handle_input(self.player, self.box_list)
                 # InputHandler(self.screen).handle_input(self.player.ref_point)

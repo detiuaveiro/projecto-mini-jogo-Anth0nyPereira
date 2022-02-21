@@ -7,7 +7,6 @@ class Box(pg.sprite.Sprite):
         super().__init__()
         # self.image = pygame.Surface((50, 50))
         self.image = pg.image.load("design/box.png")
-        self.image.set_colorkey((0, 0, 0))
         # pygame.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 50))
         self.rect = self.image.get_rect(topleft=(1000, 526))
         # screen.blit(self.image, self.rect)
@@ -34,3 +33,6 @@ class Box(pg.sprite.Sprite):
 
     def set_rect(self, new_rect):
         self.rect = new_rect
+
+    def get_rect(self):
+        return self.rect

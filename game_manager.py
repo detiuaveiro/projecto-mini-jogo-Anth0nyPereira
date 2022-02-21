@@ -3,7 +3,7 @@ from pygame import QUIT
 
 from box import Box
 from command import InputHandler
-from consts import  Consts
+from consts import Consts
 from entity import Entity
 from food import Food
 from laser import Laser
@@ -52,7 +52,6 @@ class GameManager:
 
         self.font = pg.font.SysFont('arial', 30, True, False)
         self.score = 0
-
 
     def run(self):
         running = True
@@ -139,8 +138,9 @@ class GameManager:
                 laser_right.render(self.screen)
                 self.box_list.draw(self.screen)
                 hit_left = laser_left.check_collisions(self.box)
-                print(hit_left)
-                hit_right = pg.sprite.collide_mask(laser_right, self.box)
+                hit_right = laser_right.check_collisions(self.box)
+                # print(hit_left)
+                # hit_right = pg.sprite.collide_mask(laser_right, self.box)
 
                 # collision with food test
                 self.player.update(self.food_lst)
@@ -148,10 +148,11 @@ class GameManager:
                 # collisions algorithm
 
                 for box in self.box_list:
-                    if self.entity.is_awake() and not hit_left and not hit_right:
+                    if self.entity.is_awake() and hit_left and hit_right:
                         print("Game Over")
                         game_over = True
 
+                # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()
                 pg.display.update()
 

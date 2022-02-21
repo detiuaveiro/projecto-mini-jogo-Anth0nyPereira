@@ -5,8 +5,7 @@ class Food(pg.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.image = pg.image.load("design/naco.png")
-        self.image.set_colorkey((0, 0, 0))
+        self.image = pg.image.load("design/soup.png")
         self.rect = self.image.get_rect(topleft=(500, 500))
 
     def render(self, screen):

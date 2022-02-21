@@ -115,8 +115,8 @@ class GameManager:
                 self.screen.blit(self.background, (0, 0))
                 self.screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
                 self.entity.render(self.screen)  # experiment to draw the entity
-                self.player.render(self.screen)
                 self.shelter.render(self.screen)
+                self.player.render(self.screen)
 
                 self.food_lst.draw(self.screen)
                 # box.render(screen)
@@ -148,7 +148,7 @@ class GameManager:
                 # hit_right = pg.sprite.collide_mask(laser_right, self.box)
 
                 # collision with food test
-                self.player.update(self.food_lst)
+                self.player.update(self.food_lst, self.shelter)
 
                 # collisions algorithm
 

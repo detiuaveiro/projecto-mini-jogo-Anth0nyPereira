@@ -12,6 +12,9 @@ class Point(pg.sprite.Sprite):
         # create a rect to track the position of the object
         self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))
 
+    def scale(self, new_width, new_height):
+        pg.transform.scale(self.image, (new_width, new_height))
+
     def move_left(self, screen):
         # print("move left")
         vector = (-5, 0)

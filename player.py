@@ -56,13 +56,18 @@ class Player(pg.sprite.Sprite):
         screen.blit(self.image, self.rect)
         self.ref_point.render(screen)
 
-    def update(self, food_list):
-        food = pg.sprite.spritecollideany(self, food_list)
-        if food:
-            print("hit")
-            self.food = food
+    def update(self, food_list, shelter):
+        food_hit = pg.sprite.spritecollideany(self, food_list)
+        shelter_hit = self.get_rect().colliderect(shelter.reference_rect)
+        if self.food is None and food_hit:
+            self.food = food_hit
             self.image = pg.image.load("design/playerwithfood.png")
-            food.kill()
+            food_hit.kill()
+            pg.display.update()
+
+        if self.food is not None and shelter_hit:
+            self.food = None
+            self.image = pg.image.load("design/playerv1.png")
             pg.display.update()
 
     def get_rect(self):

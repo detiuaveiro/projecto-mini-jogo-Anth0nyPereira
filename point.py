@@ -1,7 +1,9 @@
 import pygame as pg
 
+from sprite import Sprite
 
-class Point(pg.sprite.Sprite):
+
+class Point(Sprite):
     def __init__(self, pos):
         super().__init__()
         self.pos_x = pos[0]

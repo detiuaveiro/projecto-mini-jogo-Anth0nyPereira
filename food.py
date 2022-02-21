@@ -1,12 +1,19 @@
 import pygame as pg
 
+from sprite import Sprite
 
-class Food(pg.sprite.Sprite):
+
+class Food(Sprite):
 
     def __init__(self, screen):
         super().__init__()
+        self.pos_x = 500
+        self.pos_y = 500
         self.image = pg.image.load("design/soup.png")
-        self.rect = self.image.get_rect(topleft=(500, 500))
+        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))
+
+    def draw(self, screen):
+        self.render(screen)
 
     def render(self, screen):
         screen.blit(self.image, self.rect)

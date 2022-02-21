@@ -1,9 +1,10 @@
 import pygame as pg
 
 from point import Point
+from sprite import Sprite
 
 
-class Player(pg.sprite.Sprite):
+class Player(Sprite):
 
     def __init__(self, pos_x, pos_y):
         # call the parent class (Sprite) constructor

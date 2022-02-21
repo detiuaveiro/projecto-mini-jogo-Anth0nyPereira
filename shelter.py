@@ -1,16 +1,17 @@
 import pygame as pg
 
 from point import Point
+from sprite import Sprite
 
 
-class Shelter(pg.sprite.Sprite):
+class Shelter(Sprite):
 
     def __init__(self):
         super().__init__()
         self.image = pg.image.load("design/shelter.png")
         self.pos_x = 1000
         self.pos_y = 400
-        self.rect = self.image.get_rect(topleft=(1000, 400))
+        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))
 
         # define rectangle where the player should overlap to drop the food
         self._reference_rect = pg.Rect((1050, 480), (40, 40))

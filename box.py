@@ -1,7 +1,9 @@
 import pygame as pg
 
+from sprite import Sprite
 
-class Box(pg.sprite.Sprite):
+
+class Box(Sprite):
 
     def __init__(self, screen):
         super().__init__()
@@ -16,6 +18,9 @@ class Box(pg.sprite.Sprite):
         return Box(self.screen, self.pos_x, self.pos_y)
 
     def draw(self, screen):
+        self.render(screen)
+
+    def render(self, screen):
         screen.blit(self.image, self.rect)
 
     def set_x(self, new_x):

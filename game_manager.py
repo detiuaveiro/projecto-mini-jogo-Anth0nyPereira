@@ -9,6 +9,7 @@ from food import Food
 from laser import Laser
 from player import Player
 from prototype import LaserSpawner
+from shelter import Shelter
 
 
 class GameManager:
@@ -27,6 +28,9 @@ class GameManager:
 
         # create entity
         self.entity = Entity()
+
+        # create shelter
+        self.shelter = Shelter()
 
         # create box to hide the player
         self.box_list = pg.sprite.Group()
@@ -112,6 +116,7 @@ class GameManager:
                 self.screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
                 self.entity.render(self.screen)  # experiment to draw the entity
                 self.player.render(self.screen)
+                self.shelter.render(self.screen)
 
                 self.food_lst.draw(self.screen)
                 # box.render(screen)

@@ -8,7 +8,7 @@ class Box(pg.sprite.Sprite):
         # self.image = pygame.Surface((50, 50))
         self.image = pg.image.load("design/box.png")
         # pygame.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 50))
-        self.rect = self.image.get_rect(topleft=(1000, 526))
+        self.rect = self.image.get_rect(topleft=(600, 526))
         # screen.blit(self.image, self.rect)
 
     def clone(self):

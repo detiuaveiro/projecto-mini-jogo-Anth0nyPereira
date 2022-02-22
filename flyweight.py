@@ -28,14 +28,24 @@ class FoodSpawner:
 
     def spawn_new_food(self):
         food = self.select_new_food()
+        for x in range(3):
+            if self.check_collision(food):
+                food = self.select_new_food()
+            else:
+                break
         self.food_list.add(food)
         self.number_foods += 1
 
+    def check_collision(self, new_food):
+        if pg.sprite.spritecollideany(new_food, self.food_list):
+            return True
+        return False
+
     def update(self, screen):
         self.food_list.draw(screen)
-
-        if self.counter % 5 == 0:
-            self.spawn_new_food()
+        if self.counter % 50 == 0:
+            if self.number_foods <= 20:
+                self.spawn_new_food()
 
         self.counter += 1
 

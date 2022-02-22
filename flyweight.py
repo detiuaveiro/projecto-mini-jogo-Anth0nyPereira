@@ -63,11 +63,6 @@ class FoodSpawner:
         return random.randrange(self.bounds_x[0], self.bounds_x[1]), \
                random.randrange(self.bounds_y[0], self.bounds_y[1])
 
-    def check_food_in_list(self, sprite):
-        if sprite in self.food_list:
-            return True
-        return False
-
     def get_food_list(self):
         return self.food_list
 

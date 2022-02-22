@@ -1,15 +1,42 @@
 import pygame as pg
+from abc import ABC, abstractmethod
+
+from consts import Consts
 
 
-class Text:
+class Text(ABC):
 
-    def __init__(self, msg):
-        self.font = pg.font.SysFont('michroma', 80, True, False)
+    @abstractmethod
+    def __init__(self, pos_x, pos_y, msg, font_style, size, color):
+        # initializing attributes
+        self.pos_x = pos_x
+        self.pos_y = pos_y
         self.msg = msg
-        '''
-            game_over_msg = "Game Over"
-            game_over_txt = font.render(game_over_msg, False, 'red')
-        '''
+        self.font_style = font_style
+        self.size = size
+        self.color = color
 
+        self.font = pg.font.SysFont(self.font_style, self.size, True, False)
+        self.text = self.font.render(self.msg, False, color)
+
+    @abstractmethod
     def render(self):
         raise NotImplemented
+
+
+class ScoreText(Text):
+
+    def __init__(self):
+        self.score = 0
+        super().__init__(1000, 40, f'Score: {self.score}', "arial", 30, "white")
+
+    def render(self, screen):
+        screen.blit(self.text, (self.pos_x, self.pos_y))  # the text-position is the position of the top-right corner
+
+
+class GameOverText(Text):
+    def __init__(self):
+        super().__init__(Consts.WIDTH // 2, 100, "GAME OVER", "michroma", 80, "red")
+
+    def render(self, screen):
+        screen.blit(self.text, (self.text.get_rect(center=(Consts.WIDTH // 2, 100))))

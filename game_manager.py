@@ -10,6 +10,7 @@ from laser import Laser
 from player import Player
 from prototype import LaserSpawner
 from shelter import Shelter
+from text import ScoreText, GameOverText
 
 
 class GameManager:
@@ -54,8 +55,9 @@ class GameManager:
         self.laser_right = Laser("red", self.entity.get_right_point_coords(), self.player.ref_point.get_pos())
         self.laser_spawner = LaserSpawner()
 
-        self.font = pg.font.SysFont('arial', 30, True, False)
-        self.score = 0
+        # initialize texts, both ScoreText and GameOverText
+        self.score_text = ScoreText()
+        self.game_over_text = GameOverText()
 
     def run(self):
         running = True
@@ -64,18 +66,14 @@ class GameManager:
             self.clock.tick(60)
             self.screen.fill("black")
             if game_over:
-                # print(pg.font.get_fonts())
-                font = pg.font.SysFont('michroma', 80, True, False)
+                self.game_over_text.render(self.screen)
 
-                self.screen.blit(game_over_txt, (game_over_txt.get_rect(center=(Consts.WIDTH // 2, 100))))
                 for event in pg.event.get():
                     if event.type == QUIT:
                         pg.quit()
                         exit()
                 pg.display.update()
             else:
-                message = f'Score: {self.score}'
-                final_text = self.font.render(message, False, 'white')
 
                 for event in pg.event.get():
                     if event.type == QUIT:
@@ -112,7 +110,7 @@ class GameManager:
                 '''
 
                 self.screen.blit(self.background, (0, 0))
-                self.screen.blit(final_text, (1000, 40))  # the text-position is the position of the top-right corner
+                self.score_text.render(self.screen)
                 self.entity.render(self.screen)  # experiment to draw the entity
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)

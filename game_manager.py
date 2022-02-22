@@ -39,6 +39,7 @@ class GameManager:
         self.box = Box(600, 526)
         # box = Box(screen, 1000, 526)
         self.box_list.add(self.box)
+        self.box_list.add(self.entity)
 
         # create food
         '''
@@ -116,12 +117,15 @@ class GameManager:
 
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
+                self.box_list.draw(self.screen)
+                '''
                 self.entity.render(self.screen)  # experiment to draw the entity
+                '''
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
                 print(f'Self.food_list: {self.food_lst}')
-                self.food_machine.update(self.screen)
+                self.food_machine.update(self.screen, self.box_list)
                 # box.render(screen)
                 # box2.render(screen)
 
@@ -144,7 +148,6 @@ class GameManager:
                 '''
                 laser_left.render(self.screen)
                 laser_right.render(self.screen)
-                self.box_list.draw(self.screen)
                 hit_left = laser_left.check_collisions(self.box)
                 hit_right = laser_right.check_collisions(self.box)
                 # print(hit_left)

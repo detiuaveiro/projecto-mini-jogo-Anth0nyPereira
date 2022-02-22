@@ -6,6 +6,12 @@ from consts import Consts
 from food import Food
 
 
+def check_collision_with_obstacles(new_food, obstacles_list):
+    if pg.sprite.spritecollideany(new_food, obstacles_list):
+        return True
+    return False
+
+
 class FoodSpawner:
     def __init__(self, minimal_bound, maximal_bound):
         self.foods = [Food(10, 10, Consts.FOOD_BREAD[0], Consts.FOOD_BREAD[1]),
@@ -26,26 +32,26 @@ class FoodSpawner:
         new_food.set_pos(self.generate_random_position())
         return new_food
 
-    def spawn_new_food(self):
+    def spawn_new_food(self, obstacles_list):
         food = self.select_new_food()
-        for x in range(3):
-            if self.check_collision(food):
+        for x in range(5):
+            if self.check_collision_with_foods(food) or check_collision_with_obstacles(food, obstacles_list):
                 food = self.select_new_food()
             else:
                 break
         self.food_list.add(food)
         self.number_foods += 1
 
-    def check_collision(self, new_food):
+    def check_collision_with_foods(self, new_food):
         if pg.sprite.spritecollideany(new_food, self.food_list):
             return True
         return False
 
-    def update(self, screen):
+    def update(self, screen, obstacles_list):
         self.food_list.draw(screen)
         if self.counter % 50 == 0:
             if self.number_foods <= 20:
-                self.spawn_new_food()
+                self.spawn_new_food(obstacles_list)
 
         self.counter += 1
 

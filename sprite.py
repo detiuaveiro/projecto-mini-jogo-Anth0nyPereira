@@ -5,12 +5,16 @@ from abc import ABC, abstractmethod
 class Sprite(ABC, pg.sprite.Sprite):
 
     @abstractmethod
-    def __init__(self):
+    def __init__(self, pos_x, pos_y, image, rect):
         super().__init__()
-        self.pos_x = 0
-        self.pos_y = 0
-        self.image = None
-        self.rect = None
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+
+        # create variable that will load the sprite itself
+        self.image = image
+
+        # create a rect to track the position of the object
+        self.rect = rect
 
     @abstractmethod
     def render(self):

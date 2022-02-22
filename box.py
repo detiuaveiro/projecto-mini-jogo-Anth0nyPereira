@@ -5,17 +5,13 @@ from sprite import Sprite
 
 class Box(Sprite):
 
-    def __init__(self, screen):
-        super().__init__()
-        # self.image = pygame.Surface((50, 50))
-        self.image = pg.image.load("design/box.png")
-        # pygame.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 50))
-        self.rect = self.image.get_rect(topleft=(600, 526))
-        # screen.blit(self.image, self.rect)
+    def __init__(self, pos_x, pos_y):
+        super().__init__(pos_x, pos_y, pg.image.load("design/box.png"), pg.image.load("design/box.png")
+                         .get_rect(topleft=(pos_x, pos_y)))
 
     def clone(self):
         # print("here")
-        return Box(self.screen, self.pos_x, self.pos_y)
+        return Box(self.pos_x, self.pos_y)
 
     def draw(self, screen):
         self.render(screen)

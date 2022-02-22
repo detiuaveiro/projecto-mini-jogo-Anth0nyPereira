@@ -34,12 +34,12 @@ class GameManager:
 
         # create box to hide the player
         self.box_list = pg.sprite.Group()
-        self.box = Box(self.screen)
+        self.box = Box(600, 526)
         # box = Box(screen, 1000, 526)
         self.box_list.add(self.box)
 
         # create food
-        food = Food(self.screen)
+        food = Food(500, 500)
         self.food_lst = pg.sprite.Group()
         self.food_lst.add(food)
 
@@ -66,8 +66,7 @@ class GameManager:
             if game_over:
                 # print(pg.font.get_fonts())
                 font = pg.font.SysFont('michroma', 80, True, False)
-                game_over_msg = "Game Over"
-                game_over_txt = font.render(game_over_msg, False, 'red')
+
                 self.screen.blit(game_over_txt, (game_over_txt.get_rect(center=(Consts.WIDTH // 2, 100))))
                 for event in pg.event.get():
                     if event.type == QUIT:

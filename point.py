@@ -4,15 +4,10 @@ from sprite import Sprite
 
 
 class Point(Sprite):
-    def __init__(self, pos):
-        super().__init__()
-        self.pos_x = pos[0]
-        self.pos_y = pos[1]
+    def __init__(self, pos_x, pos_y):
 
-        self.image = pg.image.load("design/point.png")
-
-        # create a rect to track the position of the object
-        self.rect = self.image.get_rect(topleft=(self.pos_x, self.pos_y))
+        super().__init__(pos_x, pos_y, pg.image.load("design/point.png"), pg.image.load("design/point.png")
+                         .get_rect(topleft=(pos_x, pos_y)))
 
     def scale(self, new_width, new_height):
         pg.transform.scale(self.image, (new_width, new_height))

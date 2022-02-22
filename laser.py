@@ -58,7 +58,7 @@ class Laser(pg.sprite.Sprite):
 
         for coord in self.positions:
             if pg.Rect.collidepoint(box.get_rect(), coord):
-                print(coord)
+                # print(coord)
                 return True
         return False
 

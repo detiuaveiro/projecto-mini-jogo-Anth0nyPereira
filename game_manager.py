@@ -5,6 +5,7 @@ from box import Box
 from command import InputHandler
 from consts import Consts
 from entity import Entity
+from flyweight import FoodSpawner
 from food import Food
 from laser import Laser
 from player import Player
@@ -40,9 +41,13 @@ class GameManager:
         self.box_list.add(self.box)
 
         # create food
+        '''
         food = Food(500, 500)
         self.food_lst = pg.sprite.Group()
         self.food_lst.add(food)
+        '''
+        self.food_machine = FoodSpawner(0, 200)
+        self.food_lst = self.food_machine.food_list
 
         # experiment to create a box spawner
         # box_spawner = BoxSpawner()
@@ -115,7 +120,8 @@ class GameManager:
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
-                self.food_lst.draw(self.screen)
+                print(f'Self.food_list: {self.food_lst}')
+                self.food_machine.update(self.screen)
                 # box.render(screen)
                 # box2.render(screen)
 

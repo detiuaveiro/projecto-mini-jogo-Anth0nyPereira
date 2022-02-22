@@ -40,6 +40,11 @@ class GameManager:
         self.box_list.add(self.box)
         self.box_list.add(self.entity)
 
+        self.all_obstacles_list = pg.sprite.Group()
+        self.all_obstacles_list.add(self.box)
+        self.all_obstacles_list.add(self.entity)
+        self.all_obstacles_list.add(self.shelter)
+
         # create food
         self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT)
         self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT)
@@ -103,10 +108,10 @@ class GameManager:
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
-                self.food_machine.update(self.screen, self.food_machine.get_food_list())
-                self.food_machine2.update(self.screen, self.food_machine2.get_food_list())
-                self.food_machine3.update(self.screen, self.food_machine3.get_food_list())
-                self.food_machine4.update(self.screen, self.food_machine4.get_food_list())
+                self.food_machine.update(self.screen, self.all_obstacles_list)
+                self.food_machine2.update(self.screen, self.all_obstacles_list)
+                self.food_machine3.update(self.screen, self.all_obstacles_list)
+                self.food_machine4.update(self.screen, self.all_obstacles_list)
 
                 self.laser_left.set_ending_point(self.player.ref_point.get_pos())
                 self.laser_right.set_ending_point(self.player.ref_point.get_pos())

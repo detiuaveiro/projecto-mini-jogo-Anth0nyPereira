@@ -47,8 +47,11 @@ class GameManager:
         self.food_lst = pg.sprite.Group()
         self.food_lst.add(food)
         '''
-        self.food_machine = FoodSpawner(0, 200)
-        self.food_lst = self.food_machine.food_list
+        self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT)
+        self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT)
+        self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT)
+        self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT)
+        # self.food_lst = self.food_machine.food_list
 
         # experiment to create a box spawner
         # box_spawner = BoxSpawner()
@@ -124,8 +127,11 @@ class GameManager:
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
-                print(f'Self.food_list: {self.food_lst}')
-                self.food_machine.update(self.screen, self.box_list)
+                # print(f'Self.food_list: {self.food_lst}')
+                self.food_machine.update(self.screen, self.food_machine.get_food_list())
+                self.food_machine2.update(self.screen, self.food_machine2.get_food_list())
+                self.food_machine3.update(self.screen, self.food_machine3.get_food_list())
+                self.food_machine4.update(self.screen, self.food_machine4.get_food_list())
                 # box.render(screen)
                 # box2.render(screen)
 
@@ -154,10 +160,12 @@ class GameManager:
                 # hit_right = pg.sprite.collide_mask(laser_right, self.box)
 
                 # collision with food test
-                self.player.update(self.food_lst, self.shelter)
+                self.player.update(self.screen, self.food_machine.get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, self.food_machine2.get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, self.food_machine3.get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, self.food_machine4.get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm
-
                 for box in self.box_list:
                     if self.entity.is_awake() and hit_left and hit_right:
                         print("Game Over")

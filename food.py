@@ -39,3 +39,7 @@ class Food(Sprite):
 
     def set_rect(self, new_rect):
         self.rect = new_rect
+
+    def get_score(self):
+        return self.score
+

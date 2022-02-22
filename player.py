@@ -1,5 +1,7 @@
 import pygame as pg
 
+from consts import Consts
+from food import Food
 from point import Point
 from sprite import Sprite
 
@@ -50,7 +52,7 @@ class Player(Sprite):
         screen.blit(self.image, self.rect)
         self.ref_point.render(screen)
 
-    def update(self, food_list, shelter):
+    def update(self, screen, food_list, shelter, score):
         food_hit = pg.sprite.spritecollideany(self, food_list)
         shelter_hit = self.get_rect().colliderect(shelter.reference_rect)
         if self.food is None and food_hit:
@@ -60,6 +62,9 @@ class Player(Sprite):
             pg.display.update()
 
         if self.food is not None and shelter_hit:
+            # get number of points / score
+            number_points = self.food.get_score()
+            score.update(screen, number_points)
             self.food = None
             self.image = pg.image.load("design/playerv1.png")
             pg.display.update()

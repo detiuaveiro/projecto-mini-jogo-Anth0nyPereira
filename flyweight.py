@@ -13,13 +13,17 @@ def check_collision_with_obstacles(new_food, obstacles_list):
 
 
 class FoodSpawner:
-    def __init__(self, minimal_bound, maximal_bound):
+    # each parameter is a tuple  with 2 values: minimal_bound and maximal_bound of each axis
+
+    def __init__(self, bounds):
         self.foods = [Food(10, 10, Consts.FOOD_BREAD[0], Consts.FOOD_BREAD[1]),
                       Food(10, 10, Consts.FOOD_SOUP[0], Consts.FOOD_SOUP[1]),
                       Food(10, 10, Consts.FOOD_MEAT[0], Consts.FOOD_MEAT[1])]
 
-        self.minimal_bound = minimal_bound
-        self.maximal_bound = maximal_bound
+        self.bounds = bounds
+        self.bounds_x = self.bounds[0]
+        self.bounds_y = self.bounds[1]
+
         self.number_foods = 0
         self.food_list = pg.sprite.Group()
         self.counter = 0
@@ -49,15 +53,21 @@ class FoodSpawner:
 
     def update(self, screen, obstacles_list):
         self.food_list.draw(screen)
-        if self.counter % 50 == 0:
-            if self.number_foods <= 20:
+        if self.counter % 100 == 0:
+            if self.number_foods <= 10:
                 self.spawn_new_food(obstacles_list)
 
         self.counter += 1
 
     def generate_random_position(self):
-        return random.randrange(self.minimal_bound, self.maximal_bound), \
-               random.randrange(self.minimal_bound, self.maximal_bound)
+        return random.randrange(self.bounds_x[0], self.bounds_x[1]), \
+               random.randrange(self.bounds_y[0], self.bounds_y[1])
+
+    def check_food_in_list(self, sprite):
+        if sprite in self.food_list:
+            return True
+        return False
 
     def get_food_list(self):
         return self.food_list
+

@@ -16,9 +16,12 @@ class FoodSpawner:
     # each parameter is a tuple  with 2 values: minimal_bound and maximal_bound of each axis
 
     def __init__(self, bounds):
-        self.foods = [Food(10, 10, Consts.FOOD_BREAD[0], Consts.FOOD_BREAD[1]),
-                      Food(10, 10, Consts.FOOD_SOUP[0], Consts.FOOD_SOUP[1]),
-                      Food(10, 10, Consts.FOOD_MEAT[0], Consts.FOOD_MEAT[1])]
+        self.foods = [Food(10, 10, Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[0],
+                           Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[1]),
+                      Food(10, 10, Consts.AVAILABLE_FOODS.get(Consts.FOOD_SOUP)[0],
+                           Consts.AVAILABLE_FOODS.get(Consts.FOOD_SOUP)[1]),
+                      Food(10, 10, Consts.AVAILABLE_FOODS.get(Consts.FOOD_MEAT)[0],
+                           Consts.AVAILABLE_FOODS.get(Consts.FOOD_MEAT)[1])]
 
         self.bounds = bounds
         self.bounds_x = self.bounds[0]

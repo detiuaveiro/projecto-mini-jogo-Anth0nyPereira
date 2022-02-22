@@ -6,9 +6,12 @@ class Consts:
     HEIGHT = 650
 
     # consts related to each type of food: image to sprite, number os points for score
-    FOOD_BREAD = pg.image.load("design/bread.png"), 1
-    FOOD_SOUP = pg.image.load("design/soup.png"), 5
-    FOOD_MEAT = pg.image.load("design/meat.png"), 20
+    FOOD_BREAD = "FOOD_BREAD"
+    FOOD_SOUP = "FOOD_SOUP"
+    FOOD_MEAT = "FOOD_MEAT"
+
+    AVAILABLE_FOODS = {FOOD_BREAD: [pg.image.load("design/bread.png"), 1], FOOD_SOUP: [pg.image.load("design/soup.png"), 5],
+                       FOOD_MEAT: [pg.image.load("design/meat.png"), 20]}
 
     # consts related to food spawning
     FIRST_QUADRANT = (WIDTH // 2 + 1, WIDTH - 50), (80, HEIGHT // 2)

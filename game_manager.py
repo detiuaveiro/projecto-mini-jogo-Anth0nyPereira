@@ -6,7 +6,6 @@ from command import InputHandler
 from consts import Consts
 from entity import Entity
 from flyweight import FoodSpawner
-from food import Food
 from laser import Laser
 from player import Player
 from prototype import LaserSpawner
@@ -42,16 +41,10 @@ class GameManager:
         self.box_list.add(self.entity)
 
         # create food
-        '''
-        food = Food(500, 500)
-        self.food_lst = pg.sprite.Group()
-        self.food_lst.add(food)
-        '''
         self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT)
         self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT)
         self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT)
         self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT)
-        # self.food_lst = self.food_machine.food_list
 
         # experiment to create a box spawner
         # box_spawner = BoxSpawner()
@@ -89,16 +82,6 @@ class GameManager:
                         pg.quit()
                         exit()
 
-                '''
-                if pg.key.get_pressed()[K_LEFT]:
-                    player.get_rect().move_ip(-1, 0)
-                    player.get_rect().clamp_ip(screen.get_rect())
-                if pg.key.get_pressed()[K_RIGHT]:
-                    player.get_rect().move_ip(1, 0)
-                    player.get_rect().clamp_ip(screen.get_rect())
-
-                '''
-
                 # check if entity is going to wake up
                 timestamp = pg.time.get_ticks() - self.entity.entity_previous_timestamp
                 entity_timestamp = self.entity.get_entity_timestamp()
@@ -110,13 +93,6 @@ class GameManager:
                 if self.entity.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
                     print("coming back to sleep")
                     self.entity.come_back_to_sleep()
-                '''
-                # check if player collides with box
-                box_hit_lst = pg.sprite.spritecollide(player, box_list, False)
-                if entity.is_awake() and not box_hit_lst:  # if list is empty, no collision, so game over
-                    print("Game Over")
-                    game_over = True
-                '''
 
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
@@ -127,37 +103,20 @@ class GameManager:
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
-                # print(f'Self.food_list: {self.food_lst}')
                 self.food_machine.update(self.screen, self.food_machine.get_food_list())
                 self.food_machine2.update(self.screen, self.food_machine2.get_food_list())
                 self.food_machine3.update(self.screen, self.food_machine3.get_food_list())
                 self.food_machine4.update(self.screen, self.food_machine4.get_food_list())
-                # box.render(screen)
-                # box2.render(screen)
-
-                # create laser experiment
-                # laser_left = Laser()
-                # laser_left = Laser("red", entity.get_left_point_coords(), player.ref_point.get_pos())
-                # laser_left.render(screen)
-
-                # laser_right = Laser()
-                # laser_right = Laser("red", entity.get_right_point_coords(), player.ref_point.get_pos())
-                # laser_right.render(screen)
 
                 self.laser_left.set_ending_point(self.player.ref_point.get_pos())
                 self.laser_right.set_ending_point(self.player.ref_point.get_pos())
                 laser_left = self.laser_spawner.spawn_laser(self.laser_left)
                 laser_right = self.laser_spawner.spawn_laser(self.laser_right)
-                '''
-                group = pg.sprite.Group([box, laser_left, laser_right])
-                group.draw(screen)
-                '''
+
                 laser_left.render(self.screen)
                 laser_right.render(self.screen)
                 hit_left = laser_left.check_collisions(self.box)
                 hit_right = laser_right.check_collisions(self.box)
-                # print(hit_left)
-                # hit_right = pg.sprite.collide_mask(laser_right, self.box)
 
                 # collision with food test
                 self.player.update(self.screen, self.food_machine.get_food_list(), self.shelter, self.score_text)

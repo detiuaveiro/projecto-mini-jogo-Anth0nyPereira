@@ -40,6 +40,7 @@ class FoodSpawner:
         return new_food
 
     def spawn_new_food(self, obstacles_list):
+        print(obstacles_list)
         food = self.select_new_food()
         for x in range(5):
             if self.check_collision_with_foods(food) or check_collision_with_obstacles(food, obstacles_list):

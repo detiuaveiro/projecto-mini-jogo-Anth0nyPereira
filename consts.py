@@ -25,10 +25,10 @@ class Consts:
     BOX_ANUBIS = "BOX_ANUBIS"
     # there is the path to each sprite and its size (for resize purposes)
     AVAILABLE_BOXES = {BOX_SIMPLE: [pg.image.load("design/box.png"), (100, 40)],
-                       BOX_STATUE: [pg.image.load("design/box2.png"), (50, 120)],
+                       BOX_STATUE: [pg.image.load("design/box2.png"), (60, 120)],
                        BOX_ANUBIS: [pg.image.load("design/box3.png"), (100, 100)]}
 
     # consts related to box spawning
-    ALL_QUADRANT = (0, WIDTH - 50), (0, HEIGHT - 50)
+    ALL_QUADRANT = (0, WIDTH - 80), (0, HEIGHT - 80)
 
 

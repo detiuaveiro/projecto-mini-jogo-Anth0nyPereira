@@ -36,7 +36,7 @@ class FoodSpawner(Spawner):
     def update(self, screen):
         super().update(screen)
         if self.counter % 100 == 0:
-            if self.number_foods <= 10:
+            if self.number_foods <= 4:
                 self.spawn_new_object()
 
         self.counter += 1

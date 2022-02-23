@@ -24,12 +24,7 @@ class FoodSpawner(Spawner):
                          bounds,
                          entity_shelter_list)
 
-        self.bounds = bounds
-        self.bounds_x = self.bounds[0]
-        self.bounds_y = self.bounds[1]
-
         self.number_foods = 0
-        self.food_list = pg.sprite.Group()
         self.counter = 0
 
     def spawn_new_object(self):

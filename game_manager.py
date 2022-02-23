@@ -1,7 +1,7 @@
 import pygame as pg
 from pygame import QUIT
 
-from box import Box
+from box_spawner import BoxSpawner, get_box_list
 from command import InputHandler
 from consts import Consts
 from entity import Entity
@@ -33,19 +33,14 @@ class GameManager:
         # create shelter
         self.shelter = Shelter()
 
-        # create boxes
-        '''
-        self.box_machine = BoxSpawner()
-        self.box_machine.create_all_boxes()
-        '''
-        self.box_list = pg.sprite.Group()
-        self.box = Box(600, 526, Consts.BOX_ANUBIS)
-        self.box_list.add(self.box)
-        self.box_list.add(self.entity)
-
         self.entity_shelter = pg.sprite.Group()
         self.entity_shelter.add(self.entity)
         self.entity_shelter.add(self.shelter)
+
+        # create boxes
+
+        self.box_machine = BoxSpawner(Consts.ALL_QUADRANT, self.entity_shelter)
+        self.box_machine.create_all_boxes()
 
         # create food
         self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT, self.entity_shelter)
@@ -103,7 +98,7 @@ class GameManager:
 
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
-                self.box_list.draw(self.screen)
+
                 '''
                 self.entity.render(self.screen)  # experiment to draw the entity
                 '''
@@ -115,6 +110,8 @@ class GameManager:
                 self.food_machine3.update(self.screen)
                 self.food_machine4.update(self.screen)
 
+                self.box_machine.update(self.screen)
+
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
 
@@ -125,8 +122,8 @@ class GameManager:
 
                 laser_left.render(self.screen)
                 laser_right.render(self.screen)
-                hit_left = laser_left.check_collisions(self.box)
-                hit_right = laser_right.check_collisions(self.box)
+                hit_left = laser_left.check_collisions(get_box_list())
+                hit_right = laser_right.check_collisions(get_box_list())
 
                 # collision with food test
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
@@ -135,7 +132,7 @@ class GameManager:
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm
-                for box in self.box_list:
+                for box in get_box_list():
                     if self.entity.is_awake() and hit_left and hit_right:
                         print("Game Over")
                         game_over = True
@@ -145,5 +142,5 @@ class GameManager:
                 pg.display.update()
 
                 # call inputHandler
-                InputHandler(self.screen).handle_input(self.player, self.box_list)
+                InputHandler(self.screen).handle_input(self.player, get_box_list())
                 # InputHandler(self.screen).handle_input(self.player.ref_point)

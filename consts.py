@@ -24,4 +24,7 @@ class Consts:
     BOX_STATUE = pg.image.load("design/box2.png")
     BOX_ANUBIS = pg.image.load("design/box3.png")
 
+    # consts related to box spawning
+    ALL_QUADRANT = (0, WIDTH - 50), (0, HEIGHT - 50)
+
 

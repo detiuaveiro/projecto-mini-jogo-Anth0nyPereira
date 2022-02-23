@@ -26,9 +26,9 @@ class Box(Sprite):
         self.pos_y = new_y
         self.set_rect(self.image.get_rect(topleft=(self.pos_x, self.pos_y)))
 
-    def set_pos(self, new_x, new_y):
-        self.pos_x = new_x
-        self.pos_y = new_y
+    def set_pos(self, new_pos):
+        self.pos_x = new_pos[0]
+        self.pos_y = new_pos[1]
         self.set_rect(self.image.get_rect(topleft=(self.pos_x, self.pos_y)))
 
     def set_rect(self, new_rect):

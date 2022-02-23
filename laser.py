@@ -45,7 +45,7 @@ class Laser(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(50, 50))
     '''
 
-    def check_collisions(self, box):
+    def check_collisions(self, box_list):
         # checks if there are points from the line given by the starting and ending points
         # inside the specified object aka box, the output gives the start and end points from the box that belong to the
         # line
@@ -57,9 +57,10 @@ class Laser(pg.sprite.Sprite):
         # print(f'Box get rect: {box.get_rect()}')
 
         for coord in self.positions:
-            if pg.Rect.collidepoint(box.get_rect(), coord):
-                # print(coord)
-                return True
+            for box in box_list:
+                if pg.Rect.collidepoint(box.get_rect(), coord):
+                    # print(coord)
+                    return True
         return False
 
     def render(self, screen):

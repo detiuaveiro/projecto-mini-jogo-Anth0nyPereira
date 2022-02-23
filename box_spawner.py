@@ -12,9 +12,9 @@ class BoxSpawner(Spawner):
     all_boxes = pg.sprite.Group()
 
     def __init__(self, bounds, entity_shelter_list):
-        super().__init__([Box(10, 10, Consts.BOX_SIMPLE),
-                          Box(10, 10, Consts.BOX_STATUE),
-                          Box(10, 10, Consts.BOX_ANUBIS)],
+        super().__init__([Box(10, 10, Consts.AVAILABLE_BOXES.get(Consts.BOX_SIMPLE)[0], Consts.AVAILABLE_BOXES.get(Consts.BOX_SIMPLE)[1]),
+                          Box(10, 10, Consts.AVAILABLE_BOXES.get(Consts.BOX_STATUE)[0], Consts.AVAILABLE_BOXES.get(Consts.BOX_STATUE)[1]),
+                          Box(10, 10, Consts.AVAILABLE_BOXES.get(Consts.BOX_ANUBIS)[0], Consts.AVAILABLE_BOXES.get(Consts.BOX_ANUBIS)[1])],
                          bounds,
                          entity_shelter_list)
 

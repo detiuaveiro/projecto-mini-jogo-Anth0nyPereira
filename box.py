@@ -5,12 +5,15 @@ from sprite import Sprite
 
 class Box(Sprite):
 
-    def __init__(self, pos_x, pos_y, image):
+    def __init__(self, pos_x, pos_y, image, size):
 
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
+        self.size = size
+        print(self.size)
+        self.image = pg.transform.smoothscale(self.image, self.size)
 
     def clone(self):
-        return Box(self.pos_x, self.pos_y, self.image)
+        return Box(self.pos_x, self.pos_y, self.image, self.size)
 
     def draw(self, screen):
         self.render(screen)

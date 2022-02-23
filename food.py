@@ -10,6 +10,7 @@ class Food(Sprite):
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
 
         self.score = score
+        self.image = pg.transform.smoothscale(self.image, (50, 30))
 
     def draw(self, screen):
         self.render(screen)

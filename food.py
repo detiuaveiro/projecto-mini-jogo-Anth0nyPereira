@@ -6,10 +6,6 @@ from sprite import Sprite
 class Food(Sprite):
 
     def __init__(self, pos_x, pos_y, image, score):
-        '''
-        super().__init__(pos_x, pos_y, pg.image.load("design/soup.png"), pg.image.load("design/soup.png")
-                         .get_rect(topleft=(pos_x, pos_y)))
-        '''
 
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
 

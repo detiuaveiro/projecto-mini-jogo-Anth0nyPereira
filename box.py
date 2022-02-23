@@ -5,13 +5,12 @@ from sprite import Sprite
 
 class Box(Sprite):
 
-    def __init__(self, pos_x, pos_y):
-        super().__init__(pos_x, pos_y, pg.image.load("design/box.png"), pg.image.load("design/box.png")
-                         .get_rect(topleft=(pos_x, pos_y)))
+    def __init__(self, pos_x, pos_y, image):
+
+        super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
 
     def clone(self):
-        # print("here")
-        return Box(self.pos_x, self.pos_y)
+        return Box(self.pos_x, self.pos_y, self.image)
 
     def draw(self, screen):
         self.render(screen)

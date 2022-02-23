@@ -5,7 +5,7 @@ from box import Box
 from command import InputHandler
 from consts import Consts
 from entity import Entity
-from flyweight import FoodSpawner
+from food_spawner import FoodSpawner, get_food_list
 from laser import Laser
 from player import Player
 from prototype import LaserSpawner
@@ -33,23 +33,25 @@ class GameManager:
         # create shelter
         self.shelter = Shelter()
 
-        # create box to hide the player
+        # create boxes
+        '''
+        self.box_machine = BoxSpawner()
+        self.box_machine.create_all_boxes()
+        '''
         self.box_list = pg.sprite.Group()
-        self.box = Box(600, 526)
-        # box = Box(screen, 1000, 526)
+        self.box = Box(600, 526, Consts.BOX_ANUBIS)
         self.box_list.add(self.box)
         self.box_list.add(self.entity)
 
-        self.all_obstacles_list = pg.sprite.Group()
-        self.all_obstacles_list.add(self.box)
-        self.all_obstacles_list.add(self.entity)
-        self.all_obstacles_list.add(self.shelter)
+        self.entity_shelter = pg.sprite.Group()
+        self.entity_shelter.add(self.entity)
+        self.entity_shelter.add(self.shelter)
 
         # create food
-        self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT)
-        self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT)
-        self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT)
-        self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT)
+        self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT, self.entity_shelter)
+        self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT, self.entity_shelter)
+        self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT, self.entity_shelter)
+        self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT, self.entity_shelter)
 
         # experiment to create a box spawner
         # box_spawner = BoxSpawner()
@@ -105,13 +107,16 @@ class GameManager:
                 '''
                 self.entity.render(self.screen)  # experiment to draw the entity
                 '''
+
+                # self.box_list.update(self.screen)
+
+                self.food_machine.update(self.screen)
+                self.food_machine2.update(self.screen)
+                self.food_machine3.update(self.screen)
+                self.food_machine4.update(self.screen)
+
                 self.shelter.render(self.screen)
                 self.player.render(self.screen)
-
-                self.food_machine.update(self.screen, self.all_obstacles_list)
-                self.food_machine2.update(self.screen, self.all_obstacles_list)
-                self.food_machine3.update(self.screen, self.all_obstacles_list)
-                self.food_machine4.update(self.screen, self.all_obstacles_list)
 
                 self.laser_left.set_ending_point(self.player.ref_point.get_pos())
                 self.laser_right.set_ending_point(self.player.ref_point.get_pos())
@@ -124,10 +129,10 @@ class GameManager:
                 hit_right = laser_right.check_collisions(self.box)
 
                 # collision with food test
-                self.player.update(self.screen, self.food_machine.get_food_list(), self.shelter, self.score_text)
-                self.player.update(self.screen, self.food_machine2.get_food_list(), self.shelter, self.score_text)
-                self.player.update(self.screen, self.food_machine3.get_food_list(), self.shelter, self.score_text)
-                self.player.update(self.screen, self.food_machine4.get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
+                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm
                 for box in self.box_list:

@@ -19,3 +19,9 @@ class Consts:
     THIRD_QUADRANT = (0, WIDTH // 2), (HEIGHT // 2 + 1, HEIGHT - 50)
     FOURTH_QUADRANT = (WIDTH // 2 + 1, WIDTH - 50), (HEIGHT // 2 + 1, HEIGHT - 50)
 
+    # consts related to each type of box
+    BOX_SIMPLE = pg.image.load("design/box.png")
+    BOX_STATUE = pg.image.load("design/box2.png")
+    BOX_ANUBIS = pg.image.load("design/box3.png")
+
+

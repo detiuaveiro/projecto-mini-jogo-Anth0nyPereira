@@ -49,19 +49,20 @@ class Laser(pg.sprite.Sprite):
         # checks if there are points from the line given by the starting and ending points
         # inside the specified object aka box, the output gives the start and end points from the box that belong to the
         # line
-        '''
-        if box.rect.clipline((self.starting_point, self.ending_point)) != ():
-            return True
+        for box in box_list:
+            if box.rect.clipline((self.starting_point, self.ending_point)) != ():
+                return True
         return False
-        '''
-        # print(f'Box get rect: {box.get_rect()}')
 
+        # print(f'Box get rect: {box.get_rect()}')
+        '''
         for coord in self.positions:
             for box in box_list:
                 if pg.Rect.collidepoint(box.get_rect(), coord):
                     # print(coord)
                     return True
         return False
+        '''
 
     def render(self, screen):
         pg.draw.line(screen, self.color, self.starting_point, self.ending_point, self.width)

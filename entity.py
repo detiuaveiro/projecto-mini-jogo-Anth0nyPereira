@@ -6,7 +6,9 @@ from sprite import Sprite
 
 
 def get_random_timestamp():
-    return np.random.uniform(low=3, high=20, size=(1)).astype(int)[0] * 1000  # return in ms
+    timestamp = np.random.uniform(low=3, high=20, size=(1)).astype(int)[0] * 1000  # return in ms
+    print(timestamp)
+    return timestamp
 
 
 class Entity(Sprite):
@@ -39,7 +41,6 @@ class Entity(Sprite):
         self.image = self.entity_sleeping
         self.entity_timestamp = get_random_timestamp()
         self.entity_previous_timestamp = pg.time.get_ticks()
-        print(self.entity_timestamp)
 
     def is_awake(self):
         if self.image == self.entity_awake:

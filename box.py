@@ -9,7 +9,6 @@ class Box(Sprite):
 
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
         self.size = size
-        print(self.size)
         self.image = pg.transform.smoothscale(self.image, self.size)
 
     def clone(self):

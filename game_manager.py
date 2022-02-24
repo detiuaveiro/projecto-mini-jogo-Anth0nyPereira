@@ -93,7 +93,7 @@ class GameManager:
                 timestamp = pg.time.get_ticks() - self.entity.entity_previous_timestamp
                 entity_timestamp = self.entity.get_entity_timestamp()
                 if not self.entity.is_awake() and (
-                        timestamp == self.entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 15):
+                        timestamp == self.entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 19):
                     print("waking up")
                     self.entity.wake_up()
 
@@ -128,7 +128,7 @@ class GameManager:
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm
-                if self.entity.is_awake() and hit_left and hit_right:
+                if self.entity.is_awake() and not hit_left and not hit_right:
                     print("Game Over")
                     game_over = True
 

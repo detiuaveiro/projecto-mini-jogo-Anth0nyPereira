@@ -75,5 +75,3 @@ class Player(MoveableSprite):
 
     def render(self, screen):
         super().render(screen)
-        self.ref_point.render(screen)
-

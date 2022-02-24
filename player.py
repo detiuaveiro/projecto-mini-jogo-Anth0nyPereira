@@ -45,6 +45,8 @@ class Player(MoveableSprite):
             self.image = pg.image.load("design/playerv1.png")
             pg.display.update()
 
+        self.render(screen)
+
     def render(self, screen):
         super().render(screen)
         self.ref_point.render(screen)

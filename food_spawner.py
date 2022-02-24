@@ -33,10 +33,13 @@ class FoodSpawner(Spawner):
         self.number_foods += 1
         # print(Spawner.all_objs_from_sprites)
 
+    def render(self, screen):
+        FoodSpawner.all_foods.draw(screen)
+
     def update(self, screen):
-        super().update(screen)
         if self.counter % 100 == 0:
             if self.number_foods <= 4:
                 self.spawn_new_object()
 
         self.counter += 1
+        self.render(screen)

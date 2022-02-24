@@ -17,7 +17,10 @@ class Shelter(Sprite):
         screen.blit(self.image, self.rect)
 
         # render the rectangle on second so that it overlaps the shelter sprite
-        pg.draw.rect(screen, "blue", self._reference_rect)
+        # pg.draw.rect(screen, "blue", self._reference_rect)
+
+    def update(self, screen):
+        self.render(screen)
 
     @property
     def reference_rect(self):

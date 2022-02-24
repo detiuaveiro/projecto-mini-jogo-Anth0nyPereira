@@ -26,5 +26,8 @@ class BoxSpawner(Spawner):
         for x in range(5):
             self.spawn_new_object()
 
+    def render(self, screen):
+        BoxSpawner.all_boxes.draw(screen)
+
     def update(self, screen):
-        super().update(screen)
+        self.render(screen)

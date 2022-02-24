@@ -15,8 +15,10 @@ class Spawner(ABC):
         self.bounds_y = self.bounds[1]
 
         self.entity_shelter_lst = entity_shelter_list
+
         for element in self.entity_shelter_lst:
-            Spawner.all_objs_from_sprites.add(element)
+            # Spawner.all_objs_from_spawners.add(element)
+            self.all_objs_from_sprites.add(element)
 
         self.counter = 0
 
@@ -42,8 +44,11 @@ class Spawner(ABC):
             return True
         return False
 
+    @abstractmethod
     def update(self, screen):
-        Spawner.all_objs_from_sprites.draw(screen)
+        # Spawner.all_objs_from_sprites.draw(screen)
+        # print("spawner update method called")
+        raise NotImplemented
 
     def generate_random_position(self):
         return random.randrange(self.bounds_x[0], self.bounds_x[1]), \

@@ -63,10 +63,29 @@ class GameManager:
             self.laser_right = Laser("red", self.entity.get_right_point_coords(), self.player.ref_point.get_pos())
             self.laser_spawner = LaserSpawner()
 
+            # initialize pointers to hit_left and hit_right
+            self.hit_left = None
+            self.hit_right = None
+
             # initialize texts, both ScoreText and GameOverText
             self.score_text = ScoreText()
             self.game_over_text = GameOverText()
+
             GameManager._instance = self
+
+    def update(self):
+        self.shelter.update(self.screen)
+        # collision with food test
+        self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
+
+        self.entity.update(self.screen, self.hit_left, self.hit_right)
+        self.food_machine.update(self.screen)
+        self.food_machine2.update(self.screen)
+        self.food_machine3.update(self.screen)
+        self.food_machine4.update(self.screen)
+        self.box_machine.update(self.screen)
+        self.laser_left.update(self.screen, self.player)
+        self.laser_right.update(self.screen, self.player)
 
     def run(self):
         running = True
@@ -101,30 +120,13 @@ class GameManager:
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
 
-                self.food_machine.update(self.screen)
-                self.food_machine2.update(self.screen)
-                self.food_machine3.update(self.screen)
-                self.food_machine4.update(self.screen)
+                self.laser_left = self.laser_spawner.spawn_laser(self.laser_left)
+                self.laser_right = self.laser_spawner.spawn_laser(self.laser_right)
 
-                self.box_machine.update(self.screen)
+                self.hit_left = self.laser_left.check_collisions(get_box_list())
+                self.hit_right = self.laser_right.check_collisions(get_box_list())
 
-                self.shelter.render(self.screen)
-                self.player.render(self.screen)
-
-                self.laser_left.set_ending_point(self.player.ref_point.get_pos())
-                self.laser_right.set_ending_point(self.player.ref_point.get_pos())
-                laser_left = self.laser_spawner.spawn_laser(self.laser_left)
-                laser_right = self.laser_spawner.spawn_laser(self.laser_right)
-
-                laser_left.render(self.screen)
-                laser_right.render(self.screen)
-                hit_left = laser_left.check_collisions(get_box_list())
-                hit_right = laser_right.check_collisions(get_box_list())
-
-                # collision with food test
-                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
-
-                self.entity.update(self.screen, hit_left, hit_right)
+                self.update()
 
                 # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()

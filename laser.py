@@ -4,7 +4,7 @@ import pygame as pg
 from pygame import Vector2
 
 
-class Laser(pg.sprite.Sprite):
+class Laser:
 
     def __init__(self, color, starting_point, ending_point, width=5):
         super().__init__()
@@ -55,11 +55,19 @@ class Laser(pg.sprite.Sprite):
         return False
         '''
 
+    def clone(self):
+        return Laser(self.color, self.starting_point, self.ending_point, self.width)
+
     def render(self, screen):
         pg.draw.line(screen, self.color, self.starting_point, self.ending_point, self.width)
 
-    def clone(self):
-        return Laser(self.color, self.starting_point, self.ending_point, self.width)
+    def update(self, screen, player):
+        # update coordinates of laser
+        self.set_ending_point(player.ref_point.get_pos())
+
+
+
+        self.render(screen)
 
     def set_ending_point(self, new_point):
         self.ending_point = new_point

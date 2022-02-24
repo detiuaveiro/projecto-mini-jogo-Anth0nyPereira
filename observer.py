@@ -5,11 +5,25 @@ import pygame as pg
 
 class Observer:
 
+    """
+    A base class for the observer class
+    """
+
     def on_notify(self, event):
         raise NotImplemented
 
 
 class GameOverObserver(Observer):
+
+    """
+    A concrete observer class, used to handle the game over event
+
+    Methods
+    ----------
+
+    on_notify(self, event)
+        Checks the received event and handles it if it is the SET_GAME_OVER event
+    """
 
     def on_notify(self, event):  # obj is, in this case, the bool that makes the game stop
         if event.name == Consts.SET_GAME_OVER:
@@ -17,6 +31,20 @@ class GameOverObserver(Observer):
 
 
 class Subject:
+    """
+    A base class for the subject class
+
+    Methods
+    ----------
+    add_observer(self, obs)
+        Adds a new observer to the list of observers that the subject needs to notify
+
+    remove_observer(self, obs)
+        Removes the specified observer from the list
+
+    notify(self, event)
+        Sends the event to each subscribed observer
+    """
 
     def __init__(self):
         self.observers = []
@@ -33,6 +61,15 @@ class Subject:
 
 
 class GameOverSubject(Subject):
+    """
+    Concrete subject class that checks the moment in which the event SET_GAME_OVER is created/fired
+    It basically checks the collision between each laser and the obstacles
+
+    Methods
+    ----------
+    update(self, hit_left, hit_right)
+        Checks if it's time to fire the event SET_GAME_OVER by making the collisions between each laser and obstacles
+    """
     def __init__(self):
         super().__init__()
 

@@ -15,6 +15,11 @@ from text import ScoreText, GameOverText
 
 
 class GameManager:
+    """
+    A class used to start the game
+    Recurring to Singleton, Update Method, Game Loop and Observer design patterns
+    """
+
     _instance = None
 
     @staticmethod
@@ -32,7 +37,7 @@ class GameManager:
             self.clock = pg.time.Clock()
 
             # set background
-            self.background = pg.image.load("design/background.png")
+            self.background = Consts.SPRITE_BACKGROUND
             self.background = pg.transform.scale(self.background, (Consts.WIDTH, Consts.HEIGHT))
 
             # create player
@@ -140,10 +145,8 @@ class GameManager:
 
                 self.game_over = Consts.GAME_OVER
 
-                # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()
                 pg.display.update()
 
                 # call inputHandler
                 InputHandler(self.screen).handle_input(self.player, get_box_list())
-                # InputHandler(self.screen).handle_input(self.player.ref_point)

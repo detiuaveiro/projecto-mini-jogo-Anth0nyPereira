@@ -1,10 +1,12 @@
-import math
-
 import pygame as pg
-from pygame import Vector2
 
 
 class Laser:
+    """
+    A class used to create lines that link each eye of the entity to the player
+    Useful for collision purposes
+    Recurring to Prototype and Update Method design patterns
+    """
 
     def __init__(self, color, starting_point, ending_point, width=5):
         super().__init__()
@@ -12,29 +14,6 @@ class Laser:
         self.starting_point = starting_point
         self.ending_point = ending_point
         self.width = width
-
-        # self.center = ((ending_point[0] + starting_point[0])/2, (ending_point[1] + starting_point[1])/2)
-        # self.size = math.sqrt(((abs(ending_point[0] - starting_point[0])) ** 2) + ((abs(ending_point[1] - starting_point[1])) ** 2))
-        '''
-        self.image = pg.Surface((1500, 1500))
-        self.image.set_colorkey((0, 0, 0))
-        self.rect = self.image.get_rect(topleft=(0, 0))
-        self.render(self.image)
-        self.mask = pg.mask.from_surface(self.image)
-        '''
-
-        self.vector = Vector2(self.ending_point[0] - self.starting_point[0],
-                              self.ending_point[1] - self.starting_point[1])
-        self.angle = self.vector.angle_to(Vector2(1, 0))
-        self.m = math.tan(self.angle)
-        self.b = starting_point[1] - self.m * starting_point[0]
-        self.positions = []
-        x = min(starting_point[0], ending_point[0])
-        while x < max(starting_point[0], ending_point[0]):
-            y = self.m * x + self.b
-            self.positions.append((x, y))
-            x += 1
-        # print(self.positions)
 
     def check_collisions(self, box_list):
         # checks if there are points from the line given by the starting and ending points
@@ -45,16 +24,6 @@ class Laser:
                 return True
         return False
 
-        # print(f'Box get rect: {box.get_rect()}')
-        '''
-        for coord in self.positions:
-            for box in box_list:
-                if pg.Rect.collidepoint(box.get_rect(), coord):
-                    # print(coord)
-                    return True
-        return False
-        '''
-
     def clone(self):
         return Laser(self.color, self.starting_point, self.ending_point, self.width)
 
@@ -64,8 +33,6 @@ class Laser:
     def update(self, screen, player):
         # update coordinates of laser
         self.set_ending_point(player.ref_point.get_pos())
-
-
 
         self.render(screen)
 

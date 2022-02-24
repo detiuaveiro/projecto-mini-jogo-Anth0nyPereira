@@ -52,5 +52,6 @@ class Consts:
     SPRITE_ENTITY_AWAKE = pg.image.load("design/entity_awakev1.png")
     SPRITE_SHELTER = pg.image.load("design/shelter.png")
     SPRITE_POINT = pg.image.load("design/point.png")
+    SPRITE_BACKGROUND = pg.image.load("design/background.png")
 
 

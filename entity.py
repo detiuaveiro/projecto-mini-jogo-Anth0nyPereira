@@ -8,6 +8,11 @@ from states import EntityState
 
 
 def get_random_timestamp():
+    """
+    Return
+    ----------
+        --> numpy.int64
+    """
     timestamp = np.random.uniform(low=3, high=20, size=(1)).astype(int)[0] * 1000  # return in ms
     # print(timestamp)
     return timestamp

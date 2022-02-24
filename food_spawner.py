@@ -18,6 +18,7 @@ class FoodSpawner(Spawner):
 
     """
     A concrete spawner class used to spawn food in a specific boundary/quadrant/area of the window
+    Recurring to Flyweight, Prototype and Update Method design patterns
 
     Attributes
     ----------

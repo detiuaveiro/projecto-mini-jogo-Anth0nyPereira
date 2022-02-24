@@ -16,6 +16,7 @@ def get_box_list():
 class BoxSpawner(Spawner):
     """
     A concrete spawner class used to spawn boxes on all screen
+    Recurring to Flyweight, Prototype and Update Method design patterns
 
     Attributes
     ----------

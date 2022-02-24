@@ -9,7 +9,7 @@ from food_spawner import FoodSpawner, get_food_list
 from laser import Laser
 from observer import GameOverSubject, GameOverObserver
 from player import Player
-from prototype import LaserSpawner
+from laser_spawner import LaserSpawner
 from shelter import Shelter
 from text import ScoreText, GameOverText
 

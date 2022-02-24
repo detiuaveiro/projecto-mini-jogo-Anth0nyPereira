@@ -5,6 +5,11 @@ import pygame as pg
 
 
 def get_food_list():
+    """
+    Return
+    ----------
+        --> Group()
+    """
     return FoodSpawner.all_foods
 
 
@@ -30,7 +35,13 @@ class FoodSpawner(Spawner):
         Draws all food sprites on screen
 
     update(self, screen)
-        Where the spawning of food takes place
+        Where the spawning of food take place
+
+    Functions
+    ----------
+
+    get_food_list()
+        Returns the list containing all food
     """
 
     all_foods = pg.sprite.Group()

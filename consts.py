@@ -2,6 +2,10 @@ import pygame as pg
 
 
 class Consts:
+    """
+    A class that stores some constants and pointers to some kind of information
+    """
+
     WIDTH = 1200
     HEIGHT = 650
 

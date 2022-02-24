@@ -98,17 +98,7 @@ class GameManager:
                             print("Game Over")
                             game_over = True
 
-                # check if entity is going to wake up
-                timestamp = pg.time.get_ticks() - self.entity.entity_previous_timestamp
-                entity_timestamp = self.entity.get_entity_timestamp()
-                if not self.entity.is_awake() and (
-                        timestamp == self.entity.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 19):
-                    print("waking up")
-                    self.entity.wake_up()
-
-                if self.entity.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
-                    print("coming back to sleep")
-                    self.entity.come_back_to_sleep()
+                self.entity.update(self.screen)
 
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)

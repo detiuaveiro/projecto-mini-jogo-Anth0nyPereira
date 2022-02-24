@@ -52,6 +52,21 @@ class Entity(Sprite):
         self.left_point.render(screen)
         self.right_point.render(screen)
 
+    def update(self, screen):
+        # check if entity is going to wake up
+        timestamp = pg.time.get_ticks() - self.entity_previous_timestamp
+        entity_timestamp = self.get_entity_timestamp()
+        if not self.is_awake() and (
+                timestamp == self.get_entity_timestamp() or abs(timestamp - entity_timestamp) <= 19):
+            print("waking up")
+            self.wake_up()
+
+        if self.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
+            print("coming back to sleep")
+            self.come_back_to_sleep()
+
+        self.render(screen)
+
     def get_entity_timestamp(self):
         return self.entity_timestamp
 

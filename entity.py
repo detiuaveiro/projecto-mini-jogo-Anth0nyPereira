@@ -9,11 +9,46 @@ from states import EntityState
 
 def get_random_timestamp():
     timestamp = np.random.uniform(low=3, high=20, size=(1)).astype(int)[0] * 1000  # return in ms
-    print(timestamp)
+    # print(timestamp)
     return timestamp
 
 
 class Entity(Sprite):
+    """
+        A concrete spawner class used to spawn food in a specific boundary/quadrant/area of the window
+        Recurring to Singleton, State and Update Method design patterns
+
+        Attributes
+        ----------
+
+        _instance: self
+                the entity itself
+
+        Methods
+        ----------
+
+        wake_up(self)
+            Changes the state of the entity from sleeping to awake
+
+        come_back_to_sleep(self)
+            Changes the state of the entity from awake to sleeping
+
+        is_awake(self)
+            Checks if the entity state is awake or not
+
+        render(self, screen)
+            Renders the entity on screen
+
+        update(self, screen)
+            Where the change of the entity state takes place
+
+        Functions
+        ----------
+
+        get_instance
+            Returns the only existent instance of the entity class
+        """
+
     _instance = None
 
     @staticmethod
@@ -40,7 +75,6 @@ class Entity(Sprite):
 
             # time when entity will wake up
             self.entity_timestamp = get_random_timestamp()
-            # print(self.entity_timestamp)
             self.entity_previous_timestamp = 0
 
             # create two points at the eyes position
@@ -68,11 +102,10 @@ class Entity(Sprite):
 
     def render(self, screen):
         screen.blit(self.image, self.rect)
-        self.left_point.render(screen)
-        self.right_point.render(screen)
 
     def update(self, screen):
         # check if entity is going to wake up
+        # calculate a new timestamp all the time and check if there is enough time so that the entity can wake up
         timestamp = pg.time.get_ticks() - self.entity_previous_timestamp
         entity_timestamp = self.get_entity_timestamp()
         if not self.is_awake() and (

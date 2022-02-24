@@ -98,8 +98,6 @@ class GameManager:
                             print("Game Over")
                             game_over = True
 
-                self.entity.update(self.screen)
-
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
 
@@ -126,12 +124,7 @@ class GameManager:
                 # collision with food test
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
-                # collisions algorithm
-                if self.entity.is_awake() and not hit_left and not hit_right:
-                    # call set_game_over event
-                    ev = pg.event.Event(Consts.CUSTOM_GAME_EVENT,
-                                        {"name": Consts.SET_GAME_OVER})
-                    pg.event.post(ev)
+                self.entity.update(self.screen, hit_left, hit_right)
 
                 # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()

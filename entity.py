@@ -1,6 +1,7 @@
 import pygame as pg
 import numpy as np
 
+from consts import Consts
 from point import Point
 from sprite import Sprite
 from states import EntityState
@@ -58,7 +59,7 @@ class Entity(Sprite):
         self.left_point.render(screen)
         self.right_point.render(screen)
 
-    def update(self, screen):
+    def update(self, screen, hit_left, hit_right):
         # check if entity is going to wake up
         timestamp = pg.time.get_ticks() - self.entity_previous_timestamp
         entity_timestamp = self.get_entity_timestamp()
@@ -70,6 +71,14 @@ class Entity(Sprite):
         if self.is_awake() and abs(timestamp - entity_timestamp) >= 5000:
             print("coming back to sleep")
             self.come_back_to_sleep()
+
+        # collisions algorithm
+        if self.is_awake() and not hit_left and not hit_right:
+            # print("YOU NEED TO DIE")
+            # call set_game_over event
+            ev = pg.event.Event(Consts.CUSTOM_GAME_EVENT,
+                                {"name": Consts.SET_GAME_OVER})
+            pg.event.post(ev)
 
         self.render(screen)
 

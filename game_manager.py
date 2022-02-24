@@ -14,54 +14,65 @@ from text import ScoreText, GameOverText
 
 
 class GameManager:
+    _instance = None
+
+    @staticmethod
+    def get_instance():
+        if GameManager._instance is None:
+            GameManager()
+        return GameManager._instance
 
     def __init__(self):
-        self.screen = pg.display.set_mode((Consts.WIDTH, Consts.HEIGHT))
-        pg.display.set_caption("game made with pygame")
-        self.clock = pg.time.Clock()
+        if GameManager._instance is not None:
+            raise Exception("There's already an instance of Game Manager")
+        else:
+            self.screen = pg.display.set_mode((Consts.WIDTH, Consts.HEIGHT))
+            pg.display.set_caption("game made with pygame")
+            self.clock = pg.time.Clock()
 
-        # set background
-        self.background = pg.image.load("design/background.png")
-        self.background = pg.transform.scale(self.background, (Consts.WIDTH, Consts.HEIGHT))
+            # set background
+            self.background = pg.image.load("design/background.png")
+            self.background = pg.transform.scale(self.background, (Consts.WIDTH, Consts.HEIGHT))
 
-        # create player
-        self.player = Player(1100, 550)
+            # create player
+            self.player = Player(1100, 550)
 
-        # create entity
-        self.entity = Entity()
+            # create entity
+            self.entity = Entity()
 
-        # create shelter
-        self.shelter = Shelter()
+            # create shelter
+            self.shelter = Shelter()
 
-        self.entity_shelter = pg.sprite.Group()
-        self.entity_shelter.add(self.entity)
-        self.entity_shelter.add(self.shelter)
+            self.entity_shelter = pg.sprite.Group()
+            self.entity_shelter.add(self.entity)
+            self.entity_shelter.add(self.shelter)
 
-        # create boxes
+            # create boxes
 
-        self.box_machine = BoxSpawner(Consts.ALL_QUADRANT, self.entity_shelter)
-        self.box_machine.create_all_boxes()
+            self.box_machine = BoxSpawner(Consts.ALL_QUADRANT, self.entity_shelter)
+            self.box_machine.create_all_boxes()
 
-        # create food
-        self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT, self.entity_shelter)
-        self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT, self.entity_shelter)
-        self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT, self.entity_shelter)
-        self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT, self.entity_shelter)
+            # create food
+            self.food_machine = FoodSpawner(Consts.FIRST_QUADRANT, self.entity_shelter)
+            self.food_machine2 = FoodSpawner(Consts.SECOND_QUADRANT, self.entity_shelter)
+            self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT, self.entity_shelter)
+            self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT, self.entity_shelter)
 
-        # experiment to create a box spawner
-        # box_spawner = BoxSpawner()
-        # box2 = box_spawner.spawn_box(box)
-        # print(f'{box2.pos_x} - {box2.pos_y}')
-        # box2.set_pos(400, 526)
+            # experiment to create a box spawner
+            # box_spawner = BoxSpawner()
+            # box2 = box_spawner.spawn_box(box)
+            # print(f'{box2.pos_x} - {box2.pos_y}')
+            # box2.set_pos(400, 526)
 
-        # experiment to create a laser spawner
-        self.laser_left = Laser("red", self.entity.get_left_point_coords(), self.player.ref_point.get_pos())
-        self.laser_right = Laser("red", self.entity.get_right_point_coords(), self.player.ref_point.get_pos())
-        self.laser_spawner = LaserSpawner()
+            # experiment to create a laser spawner
+            self.laser_left = Laser("red", self.entity.get_left_point_coords(), self.player.ref_point.get_pos())
+            self.laser_right = Laser("red", self.entity.get_right_point_coords(), self.player.ref_point.get_pos())
+            self.laser_spawner = LaserSpawner()
 
-        # initialize texts, both ScoreText and GameOverText
-        self.score_text = ScoreText()
-        self.game_over_text = GameOverText()
+            # initialize texts, both ScoreText and GameOverText
+            self.score_text = ScoreText()
+            self.game_over_text = GameOverText()
+            GameManager._instance = self
 
     def run(self):
         running = True
@@ -132,10 +143,9 @@ class GameManager:
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm
-                for box in get_box_list():
-                    if self.entity.is_awake() and hit_left and hit_right:
-                        print("Game Over")
-                        game_over = True
+                if self.entity.is_awake() and hit_left and hit_right:
+                    print("Game Over")
+                    game_over = True
 
                 # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()

@@ -6,7 +6,7 @@ from game_manager import GameManager
 def main():
     pg.init()
 
-    gm = GameManager()
+    gm = GameManager.get_instance()
     gm.run()
 
 

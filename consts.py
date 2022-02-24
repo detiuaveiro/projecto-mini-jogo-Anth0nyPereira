@@ -29,6 +29,6 @@ class Consts:
                        BOX_ANUBIS: [pg.image.load("design/box3.png"), (100, 100)]}
 
     # consts related to box spawning
-    ALL_QUADRANT = (0, WIDTH - 80), (0, HEIGHT - 80)
+    ALL_QUADRANT = (0, WIDTH - 150), (0, HEIGHT - 150)
 
 

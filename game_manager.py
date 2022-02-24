@@ -28,7 +28,7 @@ class GameManager:
             raise Exception("There's already an instance of Game Manager")
         else:
             self.screen = pg.display.set_mode((Consts.WIDTH, Consts.HEIGHT))
-            pg.display.set_caption("game made with pygame")
+            pg.display.set_caption("DELIVER ME :(")
             self.clock = pg.time.Clock()
 
             # set background

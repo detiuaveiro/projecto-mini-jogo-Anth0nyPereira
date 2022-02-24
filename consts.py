@@ -31,10 +31,9 @@ class Consts:
     # consts related to box spawning
     ALL_QUADRANT = (0, WIDTH - 150), (0, HEIGHT - 150)
 
-    # consts related to player states
-    PLAYER_STATES = []
-
-    # consts related to entity states
+    # const related to custom event type and handle events
+    CUSTOM_GAME_EVENT = pg.event.custom_type()
+    UPDATE_SCORE = 1
 
 
 

@@ -89,6 +89,11 @@ class GameManager:
                         pg.quit()
                         exit()
 
+                    # custom events
+                    if event.type == Consts.CUSTOM_GAME_EVENT:
+                        if event.name == Consts.UPDATE_SCORE:
+                            self.score_text.update(self.screen, event.points)
+
                 # check if entity is going to wake up
                 timestamp = pg.time.get_ticks() - self.entity.entity_previous_timestamp
                 entity_timestamp = self.entity.get_entity_timestamp()

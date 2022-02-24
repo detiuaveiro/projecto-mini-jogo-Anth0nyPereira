@@ -1,5 +1,6 @@
 import pygame as pg
 
+from consts import Consts
 from point import Point
 from sprite import MoveableSprite
 from states import PlayerState
@@ -35,9 +36,11 @@ class Player(MoveableSprite):
             pg.display.update()
 
         if self.state == PlayerState.WITH_FOOD is not None and shelter_hit:
-            # get number of points / score
-            number_points = self.food.get_score()
-            score.update(screen, number_points)
+            # get number of points /
+
+            # call update_score event
+            ev = pg.event.Event(Consts.CUSTOM_GAME_EVENT, {"name": Consts.UPDATE_SCORE, "points": self.food.get_score()})
+            pg.event.post(ev)
             self.food = None
             self.state = PlayerState.WITHOUT_FOOD
             self.image = pg.image.load("design/playerv1.png")

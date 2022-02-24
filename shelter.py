@@ -1,11 +1,24 @@
 import pygame as pg
 
 from consts import Consts
-from point import Point
 from sprite import Sprite
 
 
 class Shelter(Sprite):
+    """
+            A concrete sprite class used to represent the shelter, where the player stores their food
+            Recurring to Update Method design pattern
+
+
+            Methods
+            ----------
+
+            render(self, screen)
+                Renders the shelter on screen
+
+            update(self, screen)
+                Calls the render method (update appears because of the Update Method design pattern)
+    """
 
     def __init__(self):
         super().__init__(1000, 400, Consts.SPRITE_SHELTER, Consts.SPRITE_SHELTER

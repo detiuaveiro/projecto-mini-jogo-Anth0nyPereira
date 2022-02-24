@@ -15,7 +15,7 @@ def get_random_timestamp():
 
 class Entity(Sprite):
     """
-        A concrete spawner class used to spawn food in a specific boundary/quadrant/area of the window
+        A concrete sprite class used to represent the Entity, which is the enemy of this game basically
         Recurring to Singleton, State and Update Method design patterns
 
         Attributes
@@ -105,7 +105,8 @@ class Entity(Sprite):
 
     def update(self, screen):
         # check if entity is going to wake up
-        # calculate a new timestamp all the time and check if there is enough time so that the entity can wake up
+        # calculate a new timestamp all the time and check if there is enough time so that the entity can wake up, so
+        # if the new timestamp is the same as the one that was generated for the entity, or if they are really close
         timestamp = pg.time.get_ticks() - self.entity_previous_timestamp
         entity_timestamp = self.get_entity_timestamp()
         if not self.is_awake() and (

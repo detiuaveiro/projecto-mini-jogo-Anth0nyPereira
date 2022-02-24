@@ -7,8 +7,34 @@ from states import PlayerState
 
 
 class Player(MoveableSprite):
+    """
+    A concrete moveable sprite class that represents the player itself
+    Recurring to State, Subclass Sandbox and Update Method design patterns
+
+    Methods
+    ----------
+
+    render(self, screen)
+        Draws the player sprite
+
+    update(self, screen, food_list, shelter, score)
+        Where the player changes its state when catching food and dropping it in the shelter
+        This is also where the event to update the overall score is fired
+    """
 
     def __init__(self, pos_x, pos_y):
+
+        """
+        Parameters
+        ----------
+
+        pos_x: int
+               the first coordinate of the position of the player
+
+        pos_y: int
+                the second coordinate of the position of the player
+
+        """
 
         # initializing self.pos_x, self.pos_y, self.image and self.rect
         super().__init__(pos_x, pos_y, Consts.SPRITE_PLAYER_WITHOUT_FOOD,

@@ -49,15 +49,15 @@ class FoodSpawner(Spawner):
 
     def __init__(self, bounds, entity_shelter_list):
         """
-               Parameters
-               ----------
+           Parameters
+           ----------
 
-               bounds: tuple
-                       a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS.
-                       the other one is related to the Y_AXIS
+           bounds: tuple
+                   a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS.
+                   the other one is related to the Y_AXIS
 
-               entity_shelter_list: pygame.Group
-                       a list with the entity and shelter sprites
+           entity_shelter_list: pygame.Group
+                   a list with the entity and shelter sprites
 
         """
 

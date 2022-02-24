@@ -94,6 +94,10 @@ class GameManager:
                         if event.name == Consts.UPDATE_SCORE:
                             self.score_text.update(self.screen, event.points)
 
+                        elif event.name == Consts.SET_GAME_OVER:
+                            print("Game Over")
+                            game_over = True
+
                 # check if entity is going to wake up
                 timestamp = pg.time.get_ticks() - self.entity.entity_previous_timestamp
                 entity_timestamp = self.entity.get_entity_timestamp()
@@ -134,8 +138,10 @@ class GameManager:
 
                 # collisions algorithm
                 if self.entity.is_awake() and not hit_left and not hit_right:
-                    print("Game Over")
-                    game_over = True
+                    # call set_game_over event
+                    ev = pg.event.Event(Consts.CUSTOM_GAME_EVENT,
+                                        {"name": Consts.SET_GAME_OVER})
+                    pg.event.post(ev)
 
                 # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()

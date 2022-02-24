@@ -34,6 +34,7 @@ class Consts:
     # const related to custom event type and handle events
     CUSTOM_GAME_EVENT = pg.event.custom_type()
     UPDATE_SCORE = 1
+    SET_GAME_OVER = 2
 
 
 

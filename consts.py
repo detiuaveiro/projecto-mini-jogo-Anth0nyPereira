@@ -36,5 +36,9 @@ class Consts:
     UPDATE_SCORE = 1
     SET_GAME_OVER = 2
 
+    # const related to game over
+    IS_NOT_GAME_OVER = False
+    IS_GAME_OVER = True
+    GAME_OVER = IS_NOT_GAME_OVER
 
 

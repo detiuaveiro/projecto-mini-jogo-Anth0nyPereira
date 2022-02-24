@@ -7,6 +7,7 @@ from consts import Consts
 from entity import Entity
 from food_spawner import FoodSpawner, get_food_list
 from laser import Laser
+from observer import GameOverSubject, GameOverObserver
 from player import Player
 from prototype import LaserSpawner
 from shelter import Shelter
@@ -71,6 +72,13 @@ class GameManager:
             self.score_text = ScoreText()
             self.game_over_text = GameOverText()
 
+            self.game_over = Consts.GAME_OVER
+
+            # observer experiment
+            # for observer design pattern purpose
+            self.entity_notify = GameOverSubject()
+            self.entity_notify.add_observer(GameOverObserver())
+
             GameManager._instance = self
 
     def update(self):
@@ -78,7 +86,7 @@ class GameManager:
         # collision with food test
         self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
-        self.entity.update(self.screen, self.hit_left, self.hit_right)
+        self.entity.update(self.screen)
         self.food_machine.update(self.screen)
         self.food_machine2.update(self.screen)
         self.food_machine3.update(self.screen)
@@ -87,13 +95,14 @@ class GameManager:
         self.laser_left.update(self.screen, self.player)
         self.laser_right.update(self.screen, self.player)
 
+        self.entity_notify.update(self.hit_left, self.hit_right)
+
     def run(self):
         running = True
-        game_over = False
         while running:
             self.clock.tick(60)
             self.screen.fill("black")
-            if game_over:
+            if self.game_over:
                 self.game_over_text.render(self.screen)
 
                 for event in pg.event.get():
@@ -112,10 +121,11 @@ class GameManager:
                     if event.type == Consts.CUSTOM_GAME_EVENT:
                         if event.name == Consts.UPDATE_SCORE:
                             self.score_text.update(self.screen, event.points)
-
+                        '''
                         elif event.name == Consts.SET_GAME_OVER:
                             print("Game Over")
                             game_over = True
+                        '''
 
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
@@ -127,6 +137,8 @@ class GameManager:
                 self.hit_right = self.laser_right.check_collisions(get_box_list())
 
                 self.update()
+
+                self.game_over = Consts.GAME_OVER
 
                 # pg.draw.rect(self.screen, "red", self.box.get_rect())
                 pg.display.flip()

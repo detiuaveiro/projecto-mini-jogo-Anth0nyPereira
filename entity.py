@@ -3,6 +3,7 @@ import numpy as np
 
 from point import Point
 from sprite import Sprite
+from states import EntityState
 
 
 def get_random_timestamp():
@@ -23,6 +24,9 @@ class Entity(Sprite):
         self.entity_sleeping = pg.image.load("design/entity_sleepingv1.png")
         self.entity_awake = pg.image.load("design/entity_awakev1.png")
 
+        # initialize state
+        self.state = EntityState.SLEEPING
+
         # time when entity will wake up
         self.entity_timestamp = get_random_timestamp()
         # print(self.entity_timestamp)
@@ -36,14 +40,16 @@ class Entity(Sprite):
 
     def wake_up(self):
         self.image = self.entity_awake
+        self.state = EntityState.AWAKE
 
     def come_back_to_sleep(self):
         self.image = self.entity_sleeping
+        self.state = EntityState.SLEEPING
         self.entity_timestamp = get_random_timestamp()
         self.entity_previous_timestamp = pg.time.get_ticks()
 
     def is_awake(self):
-        if self.image == self.entity_awake:
+        if self.state == EntityState.AWAKE:
             return True
         return False
 

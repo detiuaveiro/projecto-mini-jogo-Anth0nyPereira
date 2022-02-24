@@ -36,7 +36,6 @@ class Player(MoveableSprite):
             pg.display.update()
 
         if self.state == PlayerState.WITH_FOOD is not None and shelter_hit:
-            # get number of points /
 
             # call update_score event
             ev = pg.event.Event(Consts.CUSTOM_GAME_EVENT, {"name": Consts.UPDATE_SCORE, "points": self.food.get_score()})

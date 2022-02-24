@@ -58,12 +58,6 @@ class GameManager:
             self.food_machine3 = FoodSpawner(Consts.THIRD_QUADRANT, self.entity_shelter)
             self.food_machine4 = FoodSpawner(Consts.FOURTH_QUADRANT, self.entity_shelter)
 
-            # experiment to create a box spawner
-            # box_spawner = BoxSpawner()
-            # box2 = box_spawner.spawn_box(box)
-            # print(f'{box2.pos_x} - {box2.pos_y}')
-            # box2.set_pos(400, 526)
-
             # experiment to create a laser spawner
             self.laser_left = Laser("red", self.entity.get_left_point_coords(), self.player.ref_point.get_pos())
             self.laser_right = Laser("red", self.entity.get_right_point_coords(), self.player.ref_point.get_pos())
@@ -137,9 +131,6 @@ class GameManager:
                 hit_right = laser_right.check_collisions(get_box_list())
 
                 # collision with food test
-                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
-                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
-                self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
                 self.player.update(self.screen, get_food_list(), self.shelter, self.score_text)
 
                 # collisions algorithm

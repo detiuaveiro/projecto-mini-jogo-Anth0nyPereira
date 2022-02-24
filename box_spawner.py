@@ -8,7 +8,7 @@ def get_box_list():
     """
     Return
     ----------
-        --> Group()
+        --> pygame.Group
     """
     return BoxSpawner.all_boxes
 
@@ -21,7 +21,7 @@ class BoxSpawner(Spawner):
     Attributes
     ----------
 
-    all_boxes: Group()
+    all_boxes: pygame.Group
             a list containing all sprite boxes from the game
 
     Methods
@@ -57,7 +57,7 @@ class BoxSpawner(Spawner):
                a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS.
                the other one is related to the Y_AXIS
 
-       entity_shelter_list: Group()
+       entity_shelter_list: pygame.Group
                a list with the entity and shelter sprites
 
        """

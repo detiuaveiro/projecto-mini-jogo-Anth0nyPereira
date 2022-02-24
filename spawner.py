@@ -11,7 +11,7 @@ class Spawner(ABC):
     Attributes
     ----------
 
-    all_objs_from_sprites: Group()
+    all_objs_from_sprites: pygame.Group
             a list containing all sprites from the game (except the player), so that the spawning of new
             objects doesn't overlap another sprite that exists already on that place
 
@@ -45,7 +45,7 @@ class Spawner(ABC):
         bounds: tuple
                 a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS. the other one is related to the Y_AXIS
 
-        entity_shelter_list: Group()
+        entity_shelter_list: pygame.Group
                 a list with the entity and shelter sprites
 
         """

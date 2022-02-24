@@ -8,7 +8,7 @@ def get_food_list():
     """
     Return
     ----------
-        --> Group()
+        --> pygame.Group
     """
     return FoodSpawner.all_foods
 
@@ -23,7 +23,7 @@ class FoodSpawner(Spawner):
     Attributes
     ----------
 
-    all_foods: Group()
+    all_foods: pygame.Group
             a list containing all sprite food from the game
 
     Methods
@@ -56,7 +56,7 @@ class FoodSpawner(Spawner):
                        a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS.
                        the other one is related to the Y_AXIS
 
-               entity_shelter_list: Group()
+               entity_shelter_list: pygame.Group
                        a list with the entity and shelter sprites
 
         """

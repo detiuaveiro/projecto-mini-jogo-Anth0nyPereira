@@ -104,12 +104,6 @@ class GameManager:
                 self.screen.blit(self.background, (0, 0))
                 self.score_text.render(self.screen)
 
-                '''
-                self.entity.render(self.screen)  # experiment to draw the entity
-                '''
-
-                # self.box_list.update(self.screen)
-
                 self.food_machine.update(self.screen)
                 self.food_machine2.update(self.screen)
                 self.food_machine3.update(self.screen)

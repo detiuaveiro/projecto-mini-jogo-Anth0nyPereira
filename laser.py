@@ -27,14 +27,9 @@ class Laser:
     def clone(self):
         return Laser(self.color, self.starting_point, self.ending_point, self.width)
 
-    def render(self, screen):
-        pg.draw.line(screen, self.color, self.starting_point, self.ending_point, self.width)
-
     def update(self, screen, player):
         # update coordinates of laser
         self.set_ending_point(player.ref_point.get_pos())
-
-        self.render(screen)
 
     def set_ending_point(self, new_point):
         self.ending_point = new_point

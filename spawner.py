@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 class Spawner(ABC):
     """
     An abstract class used to represent a spawner of specific objects, such as food.
+    Recurring to Subclass Sandbox design pattern
 
     Attributes
     ----------

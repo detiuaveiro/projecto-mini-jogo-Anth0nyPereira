@@ -3,6 +3,10 @@ from abc import ABC, abstractmethod
 
 
 class Sprite(ABC, pg.sprite.Sprite):
+    """
+        An abstract class used to represent a sprite (that later will be a type of sprite, such as food, box)
+        Recurring to Subclass Sandbox design pattern
+    """
 
     @abstractmethod
     def __init__(self, pos_x, pos_y, image, rect):
@@ -29,14 +33,34 @@ class Sprite(ABC, pg.sprite.Sprite):
     def set_pos(self, new_pos):
         self.pos_x = new_pos[0]
         self.pos_y = new_pos[1]
-        # self.set_rect(self.image.get_rect(topleft=(self.pos_x, self.pos_y)))
-        # self.ref_point.set_rect(self.image.get_rect(topleft=(self.pos_x, self.pos_y)))
 
     def set_rect(self, new_rect):
         self.rect = new_rect
 
 
 class MoveableSprite(Sprite):
+    """
+       A concrete type of sprite, one that is able to move (such as Player and Point sprites)
+       Recurring to Subclass Sandbox design pattern
+
+       Methods
+       ----------
+
+        move_left(self, screen)
+           Updates the position of the sprite, making it move to the left
+
+        move_right(self, screen)
+           Updates the position of the sprite, making it move to the right
+
+        move_up(self, screen)
+           Updates the position of the sprite, making it to move up
+
+        move_down(self, screen)
+           Updates the position of the sprite, making it move to move down
+
+       render(self, screen)
+           Draws sprite on screen
+       """
 
     def __init__(self, pos_x, pos_y, image, rect):
         # call the abstract parent class (Sprite) constructor

@@ -11,9 +11,43 @@ def get_food_list():
 class FoodSpawner(Spawner):
     # each parameter is a tuple  with 2 values: minimal_bound and maximal_bound of each axis
 
+    """
+    A concrete spawner class used to spawn food in a specific boundary/quadrant/area of the window
+
+    Attributes
+    ----------
+
+    all_foods: Group()
+            a list containing all sprite food from the game
+
+    Methods
+    ----------
+
+    spawn_new_object(self)
+        Selects a food and adds it to the list
+
+    render(self, screen)
+        Draws all food sprites on screen
+
+    update(self, screen)
+        Where the spawning of food takes place
+    """
+
     all_foods = pg.sprite.Group()
 
     def __init__(self, bounds, entity_shelter_list):
+        """
+               Parameters
+               ----------
+
+               bounds: tuple
+                       a tuple consisting of 2 tuples. the first is the min_boundary and max_boundary for the X-AXIS.
+                       the other one is related to the Y_AXIS
+
+               entity_shelter_list: Group()
+                       a list with the entity and shelter sprites
+
+               """
 
         super().__init__([Food(10, 10, Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[0],
                                Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[1]),
@@ -31,7 +65,6 @@ class FoodSpawner(Spawner):
         food = super().spawn_new_object()
         FoodSpawner.all_foods.add(food)
         self.number_foods += 1
-        # print(Spawner.all_objs_from_sprites)
 
     def render(self, screen):
         FoodSpawner.all_foods.draw(screen)

@@ -4,8 +4,28 @@ from sprite import Sprite
 
 
 class Food(Sprite):
+    """
+       A concrete sprite class that represents a food, which can be picked by the player to gain some points
+       Recurring to Prototype design pattern
+    """
 
     def __init__(self, pos_x, pos_y, image, score):
+        """
+        Parameters
+        ----------
+
+        pos_x: int
+               the first coordinate of the position of the food
+
+        pos_y: int
+                the second coordinate of the position of the food
+
+        image: pygame.Surface
+                the variable that stores the loaded food sprite
+
+        score: int
+                the number of points that the specific food offers to the player
+        """
 
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
 

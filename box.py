@@ -4,8 +4,28 @@ from sprite import Sprite
 
 
 class Box(Sprite):
+    """
+       A concrete sprite class that represents a box, which means it is an obstacle, where the player can hide from the entity
+       Recurring to Prototype design pattern
+    """
 
     def __init__(self, pos_x, pos_y, image, size):
+        """
+        Parameters
+        ----------
+
+        pos_x: int
+               the first coordinate of the position of the box
+
+        pos_y: int
+                the second coordinate of the position of the box
+
+        image: pygame.Surface
+                the variable that stores the loaded box sprite
+
+        size: tuple
+                the size of the box, important for scaling
+        """
 
         super().__init__(pos_x, pos_y, image, image.get_rect(topleft=(pos_x, pos_y)))
         self.size = size

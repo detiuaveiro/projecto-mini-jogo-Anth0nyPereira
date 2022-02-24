@@ -10,6 +10,24 @@ class Sprite(ABC, pg.sprite.Sprite):
 
     @abstractmethod
     def __init__(self, pos_x, pos_y, image, rect):
+        """
+        Parameters
+        ----------
+
+        pos_x: int
+               the first coordinate of the position of the sprite
+
+        pos_y: int
+                the second coordinate of the position of the sprite
+
+        image: pygame.Surface
+                the variable that stores the loaded sprite
+        
+        rect: pygame.Rect
+                it contains the sprite itself and makes possible to place the sprite in a new position and to
+                check collision between sprites
+        """
+
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -70,7 +88,6 @@ class MoveableSprite(Sprite):
     def move_left(self, screen):
         vector = (-5, 0)
         self.get_rect().move_ip(-5, 0)
-        # print(self.object.get_pos())
         self.set_pos((self.get_pos()[0] + vector[0], self.get_pos()[1] + vector[1]))
         self.get_rect().clamp_ip(screen.get_rect())
 

@@ -59,7 +59,7 @@ class FoodSpawner(Spawner):
                entity_shelter_list: Group()
                        a list with the entity and shelter sprites
 
-               """
+        """
 
         super().__init__([Food(10, 10, Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[0],
                                Consts.AVAILABLE_FOODS.get(Consts.FOOD_BREAD)[1]),

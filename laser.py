@@ -36,15 +36,6 @@ class Laser(pg.sprite.Sprite):
             x += 1
         # print(self.positions)
 
-    '''
-    def __init__(self, screen):
-        super().__init__()
-        self.image = pg.Surface((1000, 1000))
-        self.image.set_colorkey((0, 0, 0))
-        self.render(self.image)
-        self.rect = self.image.get_rect(topleft=(50, 50))
-    '''
-
     def check_collisions(self, box_list):
         # checks if there are points from the line given by the starting and ending points
         # inside the specified object aka box, the output gives the start and end points from the box that belong to the

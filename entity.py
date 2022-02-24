@@ -27,13 +27,13 @@ class Entity(Sprite):
             raise Exception("There's already an instance of Entity")
         else:
             # initializing self.pos_x, self.pos_y, self.image and self.rect
-            super().__init__(500, 40, pg.image.load("design/entity_sleepingv1.png"), pg.image.load("design/entity_sleepingv1.png")
+            super().__init__(500, 40, Consts.SPRITE_ENTITY_SLEEPING, Consts.SPRITE_ENTITY_SLEEPING
                              .get_rect(topleft=(500, 40)))
 
             # load both images
             # self.image is already loaded and created by Sprite class
-            self.entity_sleeping = pg.image.load("design/entity_sleepingv1.png")
-            self.entity_awake = pg.image.load("design/entity_awakev1.png")
+            self.entity_sleeping = Consts.SPRITE_ENTITY_SLEEPING
+            self.entity_awake = Consts.SPRITE_ENTITY_AWAKE
 
             # initialize state
             self.state = EntityState.SLEEPING

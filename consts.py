@@ -41,4 +41,12 @@ class Consts:
     IS_GAME_OVER = True
     GAME_OVER = IS_NOT_GAME_OVER
 
+    # consts related to path to load each remaining sprite
+    SPRITE_PLAYER_WITHOUT_FOOD = pg.image.load("design/playerv1.png")
+    SPRITE_PLAYER_WITH_FOOD = pg.image.load("design/playerwithfood.png")
+    SPRITE_ENTITY_SLEEPING = pg.image.load("design/entity_sleepingv1.png")
+    SPRITE_ENTITY_AWAKE = pg.image.load("design/entity_awakev1.png")
+    SPRITE_SHELTER = pg.image.load("design/shelter.png")
+    SPRITE_POINT = pg.image.load("design/point.png")
+
 

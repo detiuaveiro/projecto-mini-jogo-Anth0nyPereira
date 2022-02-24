@@ -11,8 +11,8 @@ class Player(MoveableSprite):
     def __init__(self, pos_x, pos_y):
 
         # initializing self.pos_x, self.pos_y, self.image and self.rect
-        super().__init__(pos_x, pos_y, pg.image.load("design/playerv1.png"),
-                         pg.image.load("design/playerv1.png")
+        super().__init__(pos_x, pos_y, Consts.SPRITE_PLAYER_WITHOUT_FOOD,
+                         Consts.SPRITE_PLAYER_WITHOUT_FOOD
                          .get_rect(topleft=(pos_x, pos_y)))
 
         # create a point to use it for the collision algorithm
@@ -31,7 +31,7 @@ class Player(MoveableSprite):
         if self.state == PlayerState.WITHOUT_FOOD and food_hit:
             self.food = food_hit
             self.state = PlayerState.WITH_FOOD
-            self.image = pg.image.load("design/playerwithfood.png")
+            self.image = Consts.SPRITE_PLAYER_WITH_FOOD
             food_hit.kill()
             pg.display.update()
 
@@ -42,7 +42,7 @@ class Player(MoveableSprite):
             pg.event.post(ev)
             self.food = None
             self.state = PlayerState.WITHOUT_FOOD
-            self.image = pg.image.load("design/playerv1.png")
+            self.image = Consts.SPRITE_PLAYER_WITHOUT_FOOD
             pg.display.update()
 
         self.render(screen)

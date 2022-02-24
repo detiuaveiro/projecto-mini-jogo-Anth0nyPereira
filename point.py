@@ -1,11 +1,12 @@
 import pygame as pg
 
+from consts import Consts
 from sprite import MoveableSprite
 
 
 class Point(MoveableSprite):
     def __init__(self, pos_x, pos_y):
-        super().__init__(pos_x, pos_y, pg.image.load("design/point.png"), pg.image.load("design/point.png")
+        super().__init__(pos_x, pos_y, Consts.SPRITE_POINT, Consts.SPRITE_POINT
                          .get_rect(topleft=(pos_x, pos_y)))
 
     def scale(self, new_width, new_height):

@@ -31,4 +31,10 @@ class Consts:
     # consts related to box spawning
     ALL_QUADRANT = (0, WIDTH - 150), (0, HEIGHT - 150)
 
+    # consts related to player states
+    PLAYER_STATES = []
+
+    # consts related to entity states
+
+
 
